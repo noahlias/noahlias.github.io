@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://noahlias.github.io/sitemap.xml
