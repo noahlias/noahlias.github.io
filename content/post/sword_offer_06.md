@@ -1,7 +1,7 @@
 ---
 title: "从尾到头打印链表"
 date: 2022-02-23T12:55:03+08:00
-draft: true
+draft: false
 tags: ["栈","递归","链表","双指针"]
 categories: ["Alogrithm"]
 ---

@@ -1,7 +1,7 @@
 ---
 title: "用两个栈实现队列"
 date: 2022-02-23T12:55:03+08:00
-draft: true
+draft: false
 tags: ["队列","栈"]
 categories: ["Alogrithm"]
 ---
@@ -29,7 +29,7 @@ class CQueue:
         self.A.append(value)
 
     def deleteHead(self) -> int:
-        if self.B: 
+        if self.B:
             return self.B.pop()
         if not self.A:
             return -1

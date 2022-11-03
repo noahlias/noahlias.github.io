@@ -1,7 +1,7 @@
 ---
 title: "反转链表"
 date: 2022-02-23T12:55:03+08:00
-draft: true
+draft: false
 tags: ["递归","链表"]
 categories: ["Alogrithm"]
 ---

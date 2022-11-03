@@ -1,7 +1,7 @@
 ---
 title: "动态规划"
 date: 2022-02-23T12:55:03+08:00
-draft: true
+draft: false
 tags: ["动态规划"]
 categories: ["DP"]
 ---
@@ -100,7 +100,7 @@ class Solution:
 
 常见的动态规划解法
 
-- **初始状态** 
+- **初始状态**
 - **状态转移方程**
 > dp[i] = max(dp[i-2]+nums[i],dp[i-1])
 - **边界条件**
