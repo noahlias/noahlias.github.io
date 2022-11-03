@@ -1,0 +1,127 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>动态规划 - Alias's Blog</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="Alias"><meta name=description content="动态规划 若确定给定问题具有重叠子问题和最优子结构，那么就可以使用动态规划求解。总体上看，求解可分为四步 状态定义: 构建问题最优解模型，包括问题"><meta name=keywords content="Coding,even"><meta name=generator content="Hugo 0.105.0 with theme even"><link rel=canonical href=https://noahlias.github.io/post/dp/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link href=/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><meta property="og:title" content="动态规划"><meta property="og:description" content="动态规划 若确定给定问题具有重叠子问题和最优子结构，那么就可以使用动态规划求解。总体上看，求解可分为四步 状态定义: 构建问题最优解模型，包括问题"><meta property="og:type" content="article"><meta property="og:url" content="https://noahlias.github.io/post/dp/"><meta property="article:section" content="post"><meta property="article:published_time" content="2022-02-23T12:55:03+08:00"><meta property="article:modified_time" content="2022-02-23T12:55:03+08:00"><meta itemprop=name content="动态规划"><meta itemprop=description content="动态规划 若确定给定问题具有重叠子问题和最优子结构，那么就可以使用动态规划求解。总体上看，求解可分为四步 状态定义: 构建问题最优解模型，包括问题"><meta itemprop=datePublished content="2022-02-23T12:55:03+08:00"><meta itemprop=dateModified content="2022-02-23T12:55:03+08:00"><meta itemprop=wordCount content="1085"><meta itemprop=keywords content="动态规划,"><meta name=twitter:card content="summary"><meta name=twitter:title content="动态规划"><meta name=twitter:description content="动态规划 若确定给定问题具有重叠子问题和最优子结构，那么就可以使用动态规划求解。总体上看，求解可分为四步 状态定义: 构建问题最优解模型，包括问题"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>Alias</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>Home</li></a><a href=/post/><li class=mobile-menu-item>Archives</li></a><a href=/tags/><li class=mobile-menu-item>Tags</li></a><a href=/categories/><li class=mobile-menu-item>Categories</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>Alias</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>Home</a></li><li class=menu-item><a class=menu-item-link href=/post/>Archives</a></li><li class=menu-item><a class=menu-item-link href=/tags/>Tags</a></li><li class=menu-item><a class=menu-item-link href=/categories/>Categories</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>动态规划</h1><div class=post-meta><span class=post-time>2022-02-23</span><div class=post-category><a href=/categories/dp/>DP</a></div><span class=more-meta>1085 words</span>
+<span class=more-meta>3 mins read</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>Contents</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#动态规划>动态规划</a><ul><li><a href=#斐波那契数列>斐波那契数列</a></li><li><a href=#丑数>丑数</a><ul><li><a href=#解法>解法</a></li><li><a href=#零钱问题>零钱问题</a></li><li><a href=#打家劫舍>打家劫舍</a></li></ul></li></ul></li></ul></nav></div></div><div class=post-content><h1 id=动态规划>动态规划</h1><p>若确定给定问题具有重叠子问题和最优子结构，那么就可以使用动态规划求解。总体上看，求解可分为四步</p><ol><li><strong>状态定义</strong>: 构建问题最优解模型，包括问题最优解的定义、有哪些计算解的自变量;</li><li><strong>初始状态</strong>: 确定基础子问题的解（即已知解），原问题和子问题的解都是以基础子问题的解为起始点，在迭代计算中得到的</li><li><strong>转移方程</strong>: 确定原问题的解与子问题的解之间的关系是什么，以及使用何种选择规则从子问题最优解组合中选出原问题最优解</li><li><strong>返回值</strong>: 确定应返回的问题的解是什么 即动态规划在何处停止迭代</li></ol><h2 id=斐波那契数列>斐波那契数列</h2><ul><li>状态定义： 设 dpdp 为一维数组，其中 dp[i]dp[i] 的值代表斐波那契数列的第 ii 个数字。</li><li>转移方程： dp[i + 1] = dp[i] + dp[i - 1]dp[i+1]=dp[i]+dp[i−1] ，即对应数列定义 f(n + 1) = f(n) + f(n - 1)f(n+1)=f(n)+f(n−1) ；</li><li>初始状态： dp[0] = 1dp[0]=1, dp[1] = 1dp[1]=1 ，即初始化前两个数字；</li><li>返回值： dp[n]dp[n] ，即斐波那契数列的第 n个数字。</li></ul><h2 id=丑数>丑数</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>def</span> <span class=nf>nthUglyNumber</span><span class=p>(</span><span class=n>n</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>int</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>dp</span><span class=p>,</span> <span class=n>a</span><span class=p>,</span> <span class=n>b</span><span class=p>,</span> <span class=n>c</span> <span class=o>=</span> <span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>*</span> <span class=n>n</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>n</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>n2</span><span class=p>,</span> <span class=n>n3</span><span class=p>,</span> <span class=n>n5</span> <span class=o>=</span> <span class=n>dp</span><span class=p>[</span><span class=n>a</span><span class=p>]</span> <span class=o>*</span> <span class=mi>2</span><span class=p>,</span> <span class=n>dp</span><span class=p>[</span><span class=n>b</span><span class=p>]</span> <span class=o>*</span> <span class=mi>3</span><span class=p>,</span> <span class=n>dp</span><span class=p>[</span><span class=n>c</span><span class=p>]</span> <span class=o>*</span> <span class=mi>5</span>
+</span></span><span class=line><span class=cl>        <span class=n>dp</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>=</span> <span class=nb>min</span><span class=p>(</span><span class=n>n2</span><span class=p>,</span> <span class=n>n3</span><span class=p>,</span> <span class=n>n5</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>dp</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>==</span> <span class=n>n2</span><span class=p>:</span> <span class=n>a</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>dp</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>==</span> <span class=n>n3</span><span class=p>:</span> <span class=n>b</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>dp</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>==</span> <span class=n>n5</span><span class=p>:</span> <span class=n>c</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>dp</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=解法>解法</h3><ul><li><p><strong>状态定义</strong> : 设动态规划列表dp, dp[i] 代表第n+1 个丑数</p></li><li><p><strong>转移方程</strong>：</p><ol><li>当索引a、b、c 满足以下条件, dp[i] 为三种情况的最小值;</li><li>每轮计算dp[i],需要更新索引 值 使其始终满足方程条件</li></ol></li><li><p><strong>初始状</strong>：dp[0]=1, 第一个丑数为1</p></li><li><p><strong>返回值</strong>: dp[n-1], 即返回第n个丑数</p></li></ul><h3 id=零钱问题>零钱问题</h3><p>给你一个整数数组 coins ，表示不同面额的硬币；以及一个整数 amount ，表示总金额。
+计算并返回可以凑成总金额所需的 最少的硬币个数 。如果没有任何一种硬币组合能组成总金额，返回 -1 。
+你可以认为每种硬币的数量是无限的.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Solution</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>coinChange</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>coins</span><span class=p>,</span> <span class=n>amount</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>        :type coins: List[int]
+</span></span></span><span class=line><span class=cl><span class=s2>        :type amount: int
+</span></span></span><span class=line><span class=cl><span class=s2>        :rtype: int
+</span></span></span><span class=line><span class=cl><span class=s2>        &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>dp</span> <span class=o>=</span> <span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>+</span> <span class=p>[</span><span class=nb>float</span><span class=p>(</span><span class=s1>&#39;inf&#39;</span><span class=p>)]</span> <span class=o>*</span> <span class=n>amount</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>amount</span><span class=o>+</span><span class=mi>1</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>coin</span> <span class=ow>in</span> <span class=n>coins</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=n>i</span> <span class=o>&gt;=</span> <span class=n>coin</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=n>dp</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>=</span> <span class=nb>min</span><span class=p>(</span><span class=n>dp</span><span class=p>[</span><span class=n>i</span><span class=p>],</span> <span class=n>dp</span><span class=p>[</span><span class=n>i</span><span class=o>-</span><span class=n>coin</span><span class=p>]</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>dp</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span> <span class=k>if</span> <span class=n>dp</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span> <span class=o>!=</span> <span class=nb>float</span><span class=p>(</span><span class=s1>&#39;inf&#39;</span><span class=p>)</span> <span class=k>else</span> <span class=o>-</span><span class=mi>1</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=打家劫舍>打家劫舍</h3><p>你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。</p><p>给定一个代表每个房屋存放金额的非负整数数组，计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额。</p><blockquote><p>使用滚动数组降低空间复杂度 有点类似于斐波那契数列中的递归解法</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Solution</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>rob</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>nums</span><span class=p>:</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>])</span> <span class=o>-&gt;</span> <span class=nb>int</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=ow>not</span> <span class=n>nums</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>size</span> <span class=o>=</span> <span class=nb>len</span><span class=p>(</span><span class=n>nums</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>size</span> <span class=o>==</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>nums</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>first</span><span class=p>,</span> <span class=n>second</span> <span class=o>=</span> <span class=n>nums</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=nb>max</span><span class=p>(</span><span class=n>nums</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=n>nums</span><span class=p>[</span><span class=mi>1</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>2</span><span class=p>,</span> <span class=n>size</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=n>first</span><span class=p>,</span> <span class=n>second</span> <span class=o>=</span> <span class=n>second</span><span class=p>,</span> <span class=nb>max</span><span class=p>(</span><span class=n>first</span> <span class=o>+</span> <span class=n>nums</span><span class=p>[</span><span class=n>i</span><span class=p>],</span> <span class=n>second</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>second</span>
+</span></span></code></pre></td></tr></table></div></div><p>常见的动态规划解法</p><ul><li><strong>初始状态</strong></li><li><strong>状态转移方程</strong></li></ul><blockquote><p>dp[i] = max(dp[i-2]+nums[i],dp[i-1])</p></blockquote><ul><li><strong>边界条件</strong></li></ul><blockquote><p>dp[0] = num[0] 只有一间房屋
+dp[1] = max(num[0],num[1]) 两间房屋选择最大的一间</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Solution</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>rob</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>nums</span><span class=p>:</span> <span class=n>List</span><span class=p>[</span><span class=nb>int</span><span class=p>])</span> <span class=o>-&gt;</span> <span class=nb>int</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=ow>not</span> <span class=n>nums</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>size</span> <span class=o>=</span> <span class=nb>len</span><span class=p>(</span><span class=n>nums</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>size</span> <span class=o>==</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>nums</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>dp</span> <span class=o>=</span> <span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>*</span> <span class=n>size</span>
+</span></span><span class=line><span class=cl>        <span class=n>dp</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>=</span> <span class=n>nums</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>dp</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>=</span> <span class=nb>max</span><span class=p>(</span><span class=n>nums</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=n>nums</span><span class=p>[</span><span class=mi>1</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>2</span><span class=p>,</span> <span class=n>size</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=n>dp</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>=</span> <span class=nb>max</span><span class=p>(</span><span class=n>dp</span><span class=p>[</span><span class=n>i</span> <span class=o>-</span> <span class=mi>2</span><span class=p>]</span> <span class=o>+</span> <span class=n>nums</span><span class=p>[</span><span class=n>i</span><span class=p>],</span> <span class=n>dp</span><span class=p>[</span><span class=n>i</span> <span class=o>-</span> <span class=mi>1</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>dp</span><span class=p>[</span><span class=n>size</span> <span class=o>-</span> <span class=mi>1</span><span class=p>]</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>Author</span>
+<span class=item-content>Alias</span></p><p class=copyright-item><span class=item-title>LastMod</span>
+<span class=item-content>2022-02-23</span></p></div><footer class=post-footer><div class=post-tags><a href=/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/>动态规划</a></div><nav class=post-nav><a class=prev href=/post/merge/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">分治算法</span>
+<span class="prev-text nav-mobile">Prev</span></a>
+<a class=next href=/post/sword_offfer_24/><span class="next-text nav-default">反转链表</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div></div></main><footer id=footer class=footer><div class=social-links><a href=https://www.github.com/alias93 class="iconfont icon-github" title=github></a>
+<a href=https://noahlias.github.io class="iconfont icon-weibo" title=weibo></a>
+<a href=https://noahlias.github.io class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://noahlias.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a></span>
+<span class=division>|</span>
+<span class=theme-info>Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span>
+<span class=copyright-year>&copy;
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Alias</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script>
+<script type=text/javascript>window.MathJax={tex:{}}</script><script async src=https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin=anonymous></script></body></html>

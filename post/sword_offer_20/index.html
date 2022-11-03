@@ -1,0 +1,102 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>表示数值的字符串 - Alias's Blog</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="Alias"><meta name=description content="数值字符串 解法 本题使用有限状态自动机。根据字符类型和合法数值的特点，先定义状态，再画出状态转移图，最后编写代码即可。 字符类型： 空格 「 」、数字"><meta name=keywords content="Coding,even"><meta name=generator content="Hugo 0.105.0 with theme even"><link rel=canonical href=https://noahlias.github.io/post/sword_offer_20/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link href=/sass/main.min.b5a744db6de49a86cadafb3b70f555ab443f83c307a483402259e94726b045ff.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><meta property="og:title" content="表示数值的字符串"><meta property="og:description" content="数值字符串 解法 本题使用有限状态自动机。根据字符类型和合法数值的特点，先定义状态，再画出状态转移图，最后编写代码即可。 字符类型： 空格 「 」、数字"><meta property="og:type" content="article"><meta property="og:url" content="https://noahlias.github.io/post/sword_offer_20/"><meta property="article:section" content="post"><meta property="article:published_time" content="2022-02-23T12:55:03+08:00"><meta property="article:modified_time" content="2022-02-23T12:55:03+08:00"><meta itemprop=name content="表示数值的字符串"><meta itemprop=description content="数值字符串 解法 本题使用有限状态自动机。根据字符类型和合法数值的特点，先定义状态，再画出状态转移图，最后编写代码即可。 字符类型： 空格 「 」、数字"><meta itemprop=datePublished content="2022-02-23T12:55:03+08:00"><meta itemprop=dateModified content="2022-02-23T12:55:03+08:00"><meta itemprop=wordCount content="758"><meta itemprop=keywords content="字符串,有限状态自动机,"><meta name=twitter:card content="summary"><meta name=twitter:title content="表示数值的字符串"><meta name=twitter:description content="数值字符串 解法 本题使用有限状态自动机。根据字符类型和合法数值的特点，先定义状态，再画出状态转移图，最后编写代码即可。 字符类型： 空格 「 」、数字"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>Alias</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>Home</li></a><a href=/post/><li class=mobile-menu-item>Archives</li></a><a href=/tags/><li class=mobile-menu-item>Tags</li></a><a href=/categories/><li class=mobile-menu-item>Categories</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>Alias</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>Home</a></li><li class=menu-item><a class=menu-item-link href=/post/>Archives</a></li><li class=menu-item><a class=menu-item-link href=/tags/>Tags</a></li><li class=menu-item><a class=menu-item-link href=/categories/>Categories</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>表示数值的字符串</h1><div class=post-meta><span class=post-time>2022-02-23</span><div class=post-category><a href=/categories/alogrithm/>Alogrithm</a></div><span class=more-meta>758 words</span>
+<span class=more-meta>2 mins read</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>Contents</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#数值字符串>数值字符串</a><ul><li><a href=#解法>解法</a></li><li><a href=#偷懒解法>偷懒解法</a></li></ul></li></ul></nav></div></div><div class=post-content><h1 id=数值字符串>数值字符串</h1><h2 id=解法>解法</h2><p>本题使用有限状态自动机。根据字符类型和合法数值的特点，先定义状态，再画出状态转移图，最后编写代码即可。</p><p>字符类型：</p><p>空格 「 」、数字「 0—90—9 」 、正负号 「 ++, -− 」 、小数点 「 .. 」 、幂符号 「 ee, EE 」 。</p><p>状态定义：</p><p>按照字符串从左到右的顺序，定义以下 9 种状态。</p><p>开始的空格
+幂符号前的正负号
+小数点前的数字
+小数点、小数点后的数字
+当小数点前为空格时，小数点、小数点后的数字
+幂符号
+幂符号后的正负号
+幂符号后的数字
+结尾的空格
+结束状态：</p><p>合法的结束状态有 2, 3, 7, 8 。</p><p>初始化：</p><p>状态转移表 states ： 设 states[i] ，其中 i 为所处状态， states[i] 使用哈希表存储可转移至的状态。键值对 (key, value) 含义：输入字符 key ，则从状态 i 转移至状态 value 。
+当前状态 p ： 起始状态初始化为 p = 0 。
+状态转移循环： 遍历字符串 s 的每个字符 c 。</p><p>记录字符类型 t ： 分为四种情况。
+当 c 为正负号时，执行 t = &rsquo;s&rsquo; ;
+当 c 为数字时，执行 t = &rsquo;d&rsquo; ;
+当 c 为 e 或 E 时，执行 t = &rsquo;e&rsquo; ;
+当 c 为 . 或 空格 时，执行 t = c （即用字符本身表示字符类型）;
+否则，执行 t = &lsquo;?&rsquo; ，代表为不属于判断范围的非法字符，后续直接返回 falsefalse 。
+终止条件： 若字符类型 t 不在哈希表 states[p] 中，说明无法转移至下一状态，因此直接返回 falsefalse 。
+状态转移： 状态 p 转移至 states[p][t] 。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Solution</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>isNumber</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>s</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>bool</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>states</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span> <span class=s1>&#39; &#39;</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span> <span class=s1>&#39;s&#39;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span> <span class=s1>&#39;d&#39;</span><span class=p>:</span> <span class=mi>2</span><span class=p>,</span> <span class=s1>&#39;.&#39;</span><span class=p>:</span> <span class=mi>4</span> <span class=p>},</span> <span class=c1># 0. start with &#39;blank&#39;</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span> <span class=s1>&#39;d&#39;</span><span class=p>:</span> <span class=mi>2</span><span class=p>,</span> <span class=s1>&#39;.&#39;</span><span class=p>:</span> <span class=mi>4</span> <span class=p>}</span> <span class=p>,</span>                <span class=c1># 1. &#39;sign&#39; before &#39;e&#39;</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span> <span class=s1>&#39;d&#39;</span><span class=p>:</span> <span class=mi>2</span><span class=p>,</span> <span class=s1>&#39;.&#39;</span><span class=p>:</span> <span class=mi>3</span><span class=p>,</span> <span class=s1>&#39;e&#39;</span><span class=p>:</span> <span class=mi>5</span><span class=p>,</span> <span class=s1>&#39; &#39;</span><span class=p>:</span> <span class=mi>8</span> <span class=p>},</span> <span class=c1># 2. &#39;digit&#39; before &#39;dot&#39;</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span> <span class=s1>&#39;d&#39;</span><span class=p>:</span> <span class=mi>3</span><span class=p>,</span> <span class=s1>&#39;e&#39;</span><span class=p>:</span> <span class=mi>5</span><span class=p>,</span> <span class=s1>&#39; &#39;</span><span class=p>:</span> <span class=mi>8</span> <span class=p>},</span>         <span class=c1># 3. &#39;digit&#39; after &#39;dot&#39;</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span> <span class=s1>&#39;d&#39;</span><span class=p>:</span> <span class=mi>3</span> <span class=p>},</span>                         <span class=c1># 4. &#39;digit&#39; after &#39;dot&#39; (‘blank’ before &#39;dot&#39;)</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span> <span class=s1>&#39;s&#39;</span><span class=p>:</span> <span class=mi>6</span><span class=p>,</span> <span class=s1>&#39;d&#39;</span><span class=p>:</span> <span class=mi>7</span> <span class=p>},</span>                 <span class=c1># 5. &#39;e&#39;</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span> <span class=s1>&#39;d&#39;</span><span class=p>:</span> <span class=mi>7</span> <span class=p>},</span>                         <span class=c1># 6. &#39;sign&#39; after &#39;e&#39;</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span> <span class=s1>&#39;d&#39;</span><span class=p>:</span> <span class=mi>7</span><span class=p>,</span> <span class=s1>&#39; &#39;</span><span class=p>:</span> <span class=mi>8</span> <span class=p>},</span>                 <span class=c1># 7. &#39;digit&#39; after &#39;e&#39;</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span> <span class=s1>&#39; &#39;</span><span class=p>:</span> <span class=mi>8</span> <span class=p>}</span>                          <span class=c1># 8. end with &#39;blank&#39;</span>
+</span></span><span class=line><span class=cl>        <span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>p</span> <span class=o>=</span> <span class=mi>0</span>                           <span class=c1># start with state 0</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>c</span> <span class=ow>in</span> <span class=n>s</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=s1>&#39;0&#39;</span> <span class=o>&lt;=</span> <span class=n>c</span> <span class=o>&lt;=</span> <span class=s1>&#39;9&#39;</span><span class=p>:</span> <span class=n>t</span> <span class=o>=</span> <span class=s1>&#39;d&#39;</span> <span class=c1># digit</span>
+</span></span><span class=line><span class=cl>            <span class=k>elif</span> <span class=n>c</span> <span class=ow>in</span> <span class=s2>&#34;+-&#34;</span><span class=p>:</span> <span class=n>t</span> <span class=o>=</span> <span class=s1>&#39;s&#39;</span>     <span class=c1># sign</span>
+</span></span><span class=line><span class=cl>            <span class=k>elif</span> <span class=n>c</span> <span class=ow>in</span> <span class=s2>&#34;eE&#34;</span><span class=p>:</span> <span class=n>t</span> <span class=o>=</span> <span class=s1>&#39;e&#39;</span>     <span class=c1># e or E</span>
+</span></span><span class=line><span class=cl>            <span class=k>elif</span> <span class=n>c</span> <span class=ow>in</span> <span class=s2>&#34;. &#34;</span><span class=p>:</span> <span class=n>t</span> <span class=o>=</span> <span class=n>c</span>       <span class=c1># dot, blank</span>
+</span></span><span class=line><span class=cl>            <span class=k>else</span><span class=p>:</span> <span class=n>t</span> <span class=o>=</span> <span class=s1>&#39;?&#39;</span>               <span class=c1># unknown</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>t</span> <span class=ow>not</span> <span class=ow>in</span> <span class=n>states</span><span class=p>[</span><span class=n>p</span><span class=p>]:</span> <span class=k>return</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>            <span class=n>p</span> <span class=o>=</span> <span class=n>states</span><span class=p>[</span><span class=n>p</span><span class=p>][</span><span class=n>t</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>p</span> <span class=ow>in</span> <span class=p>(</span><span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>,</span> <span class=mi>7</span><span class=p>,</span> <span class=mi>8</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=偷懒解法>偷懒解法</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=k>class</span> <span class=nc>Solution</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>isNumber</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>s</span><span class=p>:</span> <span class=nb>str</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=nb>bool</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>res</span> <span class=o>=</span> <span class=kc>True</span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>x</span> <span class=o>=</span> <span class=nb>float</span><span class=p>(</span><span class=n>s</span><span class=o>.</span><span class=n>strip</span><span class=p>())</span>
+</span></span><span class=line><span class=cl>        <span class=k>except</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>res</span> <span class=o>=</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>res</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>Author</span>
+<span class=item-content>Alias</span></p><p class=copyright-item><span class=item-title>LastMod</span>
+<span class=item-content>2022-02-23</span></p></div><footer class=post-footer><div class=post-tags><a href=/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/>字符串</a>
+<a href=/tags/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E8%87%AA%E5%8A%A8%E6%9C%BA/>有限状态自动机</a></div><nav class=post-nav><a class=prev href=/post/sword_offer_09/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">用两个栈实现队列</span>
+<span class="prev-text nav-mobile">Prev</span></a></nav></footer></article></div></div></main><footer id=footer class=footer><div class=social-links><a href=https://www.github.com/alias93 class="iconfont icon-github" title=github></a>
+<a href=https://noahlias.github.io class="iconfont icon-weibo" title=weibo></a>
+<a href=https://noahlias.github.io class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://noahlias.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a></span>
+<span class=division>|</span>
+<span class=theme-info>Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span>
+<span class=copyright-year>&copy;
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>Alias</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script>
+<script type=text/javascript>window.MathJax={tex:{}}</script><script async src=https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin=anonymous></script></body></html>
