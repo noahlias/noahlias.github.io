@@ -56,7 +56,7 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   since = "2022"            # Site creation time          # 站点建立时间
   # use public git repo url to link lastmod git commit, enableGitInfo should be true.
   # 指定 git 仓库地址，可以生成指向最近更新的 git commit 的链接，需要将 enableGitInfo 设置成 true.
-  gitRepo = "https://github.com/alias93"
+  gitRepo = "https://github.com/noahlias"
 
   # site info (optional)                                  # 站点信息（可选，不需要的可以直接注释掉）
   logoTitle = "Alias"        # default: the title value    # 默认值: 上面设置的title值
@@ -73,7 +73,7 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   dateFormatToUse = "2006-01-02"
 
   # show word count and read time ?                       # 是否显示字数统计与阅读时间
-  moreMeta = true
+  moreMeta = false
 
   # Syntax highlighting by highlight.js
   highlightInClient = false
@@ -140,8 +140,8 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
     clientSecret = ""       # Your client secret
 
   [params.utterances]       # https://utteranc.es/
-    owner = ""              # Your GitHub ID
-    repo = ""               # The repo to store comments
+    owner = "noahlias"              # Your GitHub ID
+    repo = "noahlias.github.io"               # The repo to store comments
 
   [params.gitalk]           # Gitalk is a comment system based on GitHub issues. see https://github.com/gitalk/gitalk
     owner = ""              # Your GitHub ID
@@ -182,7 +182,7 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
     alipay = "/path/to/your/alipay-qr-code.png"           # 支付宝二维码
 
   [params.social]                                         # 社交链接
-    b-github = "https://www.github.com/alias93"
+    b-github = "https://www.github.com/noahlias"
     h-weibo = "https://noahlias.github.io"
     o-bilibili = "https://noahlias.github.io"
 
