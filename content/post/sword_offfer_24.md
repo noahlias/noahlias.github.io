@@ -4,6 +4,7 @@ date: 2022-02-23T12:55:03+08:00
 draft: false
 tags: ["递归","链表"]
 categories: ["Alogrithm"]
+author: "noahlias"
 ---
 
 # 反转链表

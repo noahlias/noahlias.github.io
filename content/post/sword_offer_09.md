@@ -4,6 +4,7 @@ date: 2022-02-23T12:55:03+08:00
 draft: false
 tags: ["队列","栈"]
 categories: ["Alogrithm"]
+author: "noahlias"
 ---
 
 # 用两个栈实现队列

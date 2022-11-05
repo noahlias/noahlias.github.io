@@ -4,6 +4,7 @@ date: 2022-02-23T12:55:03+08:00
 draft: false
 tags: ["字符串","有限状态自动机"]
 categories: ["Alogrithm"]
+author: "noahlias"
 ---
 
 # 数值字符串
