@@ -3,8 +3,7 @@ title: "把字符串转成整数"
 date: 2022-02-23T12:55:03+08:00
 draft: false
 tags: ["字符串"]
-categories: ["Alogrithm"]
-author: "noahlias"
+categories: ["Alogrithm","LeetCode"]
 ---
 
 # 字符串转成整数

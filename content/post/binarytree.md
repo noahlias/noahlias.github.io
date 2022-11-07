@@ -3,8 +3,7 @@ title: "二叉树"
 date: 2022-02-23T12:55:03+08:00
 draft: false
 tags: ["二叉树"]
-categories: ["Alogrithm"]
-author: "noahlias"
+categories: ["Alogrithm","LeetCode"]
 ---
 
 # 二叉树

@@ -3,8 +3,7 @@ title: "优先队列"
 date: 2022-02-23T12:55:03+08:00
 draft: false
 tags: ["队列"]
-categories: ["Alogrithm"]
-author: "noahlias"
+categories: ["Alogrithm","LeetCode"]
 ---
 
 # 优先队列

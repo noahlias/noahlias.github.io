@@ -3,8 +3,7 @@ title: "替换空格"
 date: 2022-02-23T12:55:03+08:00
 draft: false
 tags: ["剑指offer","Alorightms"]
-categories: ["Alogrithm"]
-author: "noahlias"
+categories: ["Alogrithm","LeetCode"]
 ---
 
 # 替换空格

@@ -3,8 +3,7 @@ title: "动态规划"
 date: 2022-02-23T12:55:03+08:00
 draft: false
 tags: ["动态规划"]
-categories: ["Alogrithm"]
-author: "noahlias"
+categories: ["Alogrithm","LeetCode"]
 ---
 
 # 动态规划
