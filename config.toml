@@ -1,6 +1,6 @@
 baseURL = "https://noahlias.github.io/"
 languageCode = "en"
-defaultContentLanguage = "en"                             # en / zh-cn / ... (This field determines which i18n file to use)
+defaultContentLanguage = "zh-CN"                             # en / zh-cn / ... (This field determines which i18n file to use)
 title = "Alias's Blog"
 preserveTaxonomyNames = true
 enableRobotsTXT = true
@@ -49,11 +49,6 @@ copyright = ""            # default: author.name ↓        # 默认为下面配
   identifier = "categories"
   url = "/categories/"
 
-[[menu.main]]
-  name = "About"
-  weight = 50
-  identifier = "about"
-  url = "/about/"
 
 
 [params]
