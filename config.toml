@@ -1,5 +1,5 @@
 baseURL = "https://noahlias.github.io/"
-languageCode = "zh-cn"
+languageCode = "en"
 defaultContentLanguage = "en"                             # en / zh-cn / ... (This field determines which i18n file to use)
 title = "Alias's Blog"
 preserveTaxonomyNames = true
