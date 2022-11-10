@@ -21,11 +21,21 @@ mathjax: true
 这门课是基于[*DataCamp*](https://campus.datacamp.com/courses/machine-learning-for-finance-in-python),
 其实前面很大一部分都是在介绍python中的一些科学工具包:
 
-- **Numpy**
-- **Pandas**
-- **Matplotlib**
-- **Seaborn**
-- **Statsmodels**
-- **Keras**
-- **Tensorflow**
-- **Ta-lib**
+- [**Numpy**](https://numpy.org/)
+- [**Pandas**](https://pandas.pydata.org/)
+- [**Matplotlib**](https://matplotlib.org/)
+- [**Seaborn**](https://seaborn.pydata.org/)
+- [**Statsmodels**](https://www.statsmodels.org/stable/index.html)
+- [**Keras**](https://keras.io/)
+- [**Tensorflow**](https://www.tensorflow.org/)
+- [**Ta-lib**](https://github.com/mrjbq7/ta-lib)
+
+## Project
+
+项目地址:[`ml_for_finance`](https://github.com/noahlias/ml_for_finance_in_python)
+
+### Usage
+
+```bash
+pip install -r requirements.txt
+```
