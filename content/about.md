@@ -7,9 +7,15 @@ weight: 50
 draft: false
 ---
 
-## Description
+![mycat](/cat.png "{width='100' height='75'}")
 
-![mycat](/cat.png)
+I am *noahlias*, now working on the `datascience` and [**cs study**](https://csdiy.wiki/). And I like do some exercise on [`LeetCode`](https://leetcode.com/) and [`ProjectEuler`](https://projecteuler.net/).
 
-- *DataScience*
-- [*ProjectEuler*](https://projecteuler.net/)
+## Interests
+
+- **Math**
+- **Machine learning**
+- **Computer Science**
+- **DataScience**
+
+> Ride the waves.
