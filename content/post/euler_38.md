@@ -2,7 +2,7 @@
 title: "Pandigital multiples"
 date: 2022-11-21T19:48:03+08:00
 draft: false
-tags: ["Math","Python"]
+tags: ["Math","Python","Pandigital"]
 categories: ["Project Euler"]
 mathjax: true
 ---

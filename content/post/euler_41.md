@@ -2,12 +2,12 @@
 title: "Pandigital prime"
 date: 2022-11-22T11:15:03+08:00
 draft: false
-tags: ["Math","Python"]
+tags: ["Math","Python","Pandigital","Prime"]
 categories: ["Project Euler"]
 mathjax: true
 ---
 
-[**Problem 38**](https://projecteuler.net/problem=41)
+[**Problem 41**](https://projecteuler.net/problem=41)
 
 ## Description
 
