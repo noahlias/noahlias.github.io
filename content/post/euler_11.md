@@ -19,7 +19,7 @@ What is the greatest product of four adjacent numbers in the same direction (up,
 
 ## Solution
 
-![problem11](/plot/problem11.svg)
+![problem11](/plot/problem11.png)
 
 ```python
 def solution(data):
