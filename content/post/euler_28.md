@@ -26,10 +26,21 @@ What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed 
 ## Solution
 
 从上面的图中找到每个斜边中的序列数字可以推导出下列公式:
-$$\begin{array}{rll} a_n &= (9, 25, 49, 81, 121, ...) &= 4n^2 + 4n + 1\\ b_n &= (5, 17, 37, 65, 101, ...) &= 4n^2 + 1\\ c_n &= (3, 13, 31, 57, 91, ...) &= 4n^2 - 2n+1\\ d_n &= (7, 21,43, 73, 111, ...) &= 4n^2 + 2n + 1 \end{array}$$
+$$\begin{array}{rll}
+a_n &= (9, 25, 49, 81, 121, ...) &= 4n^2 + 4n + 1
+\\ b_n &= (5, 17, 37, 65, 101, ...) &= 4n^2 + 1
+\\ c_n &= (3, 13, 31, 57, 91, ...) &= 4n^2 - 2n+1
+\\ d_n &= (7, 21,43, 73, 111, ...) &= 4n^2 + 2n + 1
+\end{array}$$
 
 汇总结果:
-$$\begin{array}{rl} s_n &= 1+\sum\limits_{i=1}^n (a_i + b_i + c_i + d_i)\\ &= 1+\sum\limits_{i=1}^n (16i^2 + 4i + 4)\\ &= 1+16\sum\limits_{i=1}^ni^2 + 4\sum\limits_{i=1}^ni + \sum\limits_{i=1}^n4\\ &= 1+\frac{8}{3}n(n+1)(2n+1) + 2n(n+1) + 4n\\ &= 1+\frac{2}{3}n(8n^2+15n+13) \end{array}$$
+$$\begin{array}{rl}
+s_n &= 1+\sum\limits_{i=1}^n (a_i + b_i + c_i + d_i)
+\\ &= 1+\sum\limits_{i=1}^n (16i^2 + 4i + 4)
+\\ &= 1+16\sum\limits_{i=1}^ni^2 + 4\sum\limits_{i=1}^ni + \sum\limits_{i=1}^n4
+\\ &= 1+\frac{8}{3}n(n+1)(2n+1) + 2n(n+1) + 4n
+\\ &= 1+\frac{2}{3}n(8n^2+15n+13)
+\end{array}$$
 
 ```python
 def solution(n):
