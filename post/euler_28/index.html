@@ -5,14 +5,12 @@
 20 7 8 9 10
 19 6 1 2 11
 18 5 4 3 12
-17 16 15 14 13</p><p>It can be verified that the sum of the numbers on the diagonals is 101.</p><p>What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?</p><h2 id=solution>Solution</h2><p>从上面的图中找到每个斜边中的序列数字可以推导出下列公式:
-$$\begin{array}{rll}
+17 16 15 14 13</p><p>It can be verified that the sum of the numbers on the diagonals is 101.</p><p>What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?</p><h2 id=solution>Solution</h2><p>从上面的图中找到每个斜边中的序列数字可以推导出下列公式:</p><p>$$\begin{array}{rll}
 a_n &= (9, 25, 49, 81, 121, &mldr;) &= 4n^2 + 4n + 1
 \ b_n &= (5, 17, 37, 65, 101, &mldr;) &= 4n^2 + 1
 \ c_n &= (3, 13, 31, 57, 91, &mldr;) &= 4n^2 - 2n+1
 \ d_n &= (7, 21,43, 73, 111, &mldr;) &= 4n^2 + 2n + 1
-\end{array}$$</p><p>汇总结果:
-$$\begin{array}{rl}
+\end{array}$$</p><p>汇总结果:</p><p>$$\begin{array}{rl}
 s_n &= 1+\sum\limits_{i=1}^n (a_i + b_i + c_i + d_i)
 \ &= 1+\sum\limits_{i=1}^n (16i^2 + 4i + 4)
 \ &= 1+16\sum\limits_{i=1}^ni^2 + 4\sum\limits_{i=1}^ni + \sum\limits_{i=1}^n4
