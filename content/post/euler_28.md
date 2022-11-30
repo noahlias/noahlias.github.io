@@ -26,6 +26,7 @@ What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed 
 ## Solution
 
 从上面的图中找到每个斜边中的序列数字可以推导出下列公式:
+
 $$\begin{array}{rll}
 a_n &= (9, 25, 49, 81, 121, ...) &= 4n^2 + 4n + 1
 \\ b_n &= (5, 17, 37, 65, 101, ...) &= 4n^2 + 1
@@ -34,6 +35,7 @@ a_n &= (9, 25, 49, 81, 121, ...) &= 4n^2 + 4n + 1
 \end{array}$$
 
 汇总结果:
+
 $$\begin{array}{rl}
 s_n &= 1+\sum\limits_{i=1}^n (a_i + b_i + c_i + d_i)
 \\ &= 1+\sum\limits_{i=1}^n (16i^2 + 4i + 4)
