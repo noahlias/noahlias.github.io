@@ -1,6 +1,6 @@
 ---
 title: "Day 2:Rock Paper Scissors"
-date: 2022-12-02T19:41:03+08:00
+date: 2022-12-03T01:00:03+08:00
 draft: false
 tags: ["Advent", "Game"]
 categories: ["Advent of Code"]
