@@ -1,5 +1,5 @@
 ---
-title: "Day 4: Rucksack Reorganization"
+title: "Day 4: Camp Cleanup"
 date: 2022-12-05T01:46:03+08:00
 draft: false
 tags: ["Advent", "Set"]
@@ -37,7 +37,7 @@ mathjax: true
 
 ## 解法
 
-## Part I
+### Part I
 
 ```python
 def solution_part_1(data):
@@ -57,7 +57,7 @@ def solution_part_1(data):
 
 ```
 
-## Part II
+### Part II
 
 ```python
 
