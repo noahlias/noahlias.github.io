@@ -1,6 +1,6 @@
 ---
 title: "Day 3: Rucksack Reorganization"
-date: 2022-12-03T01:00:03+08:00
+date: 2022-12-04T13:10:03+08:00
 draft: false
 tags: ["Advent", "Set"]
 categories: ["Advent of Code"]
