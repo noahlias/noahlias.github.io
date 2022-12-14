@@ -17,5 +17,8 @@ I am *noahlias*, now working on the `datascience` and [**cs study**](https://csd
 - **Machine learning**
 - **Computer Science**
 - **DataScience**
+- **LeetCode**
+
+![LeetCode Stats](https://leetcard.jacoblin.cool/noahlias?theme=unicorn&font=Grandstander&ext=heatmap)
 
 > Ride the waves.
