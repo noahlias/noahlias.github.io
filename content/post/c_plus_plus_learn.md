@@ -1,6 +1,6 @@
 ---
 title: "Learn C++ with ChatGPT"
-date: 2023-02-22 23:08:02
+date: 2023-02-22T23:08:02+08:00
 draft: false
 tags: ["ChatGPT"]
 categories: ["C++"]
