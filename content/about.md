@@ -7,17 +7,15 @@ weight: 50
 draft: false
 ---
 
-<img src='/cat.png' width='100' height='75' alt='cat'/>
+<img src='/noahlias_mj.png' alt='personal avatar'/>
 
-I am *noahlias*, now working on the `datascience` and [**cs study**](https://csdiy.wiki/). And I like do some exercise on [`LeetCode`](https://leetcode.com/) and [`ProjectEuler`](https://projecteuler.net/).
+Hi there 👋
 
 ## Interests
 
+- **AI**
 - **Math**
-- **Machine learning**
-- **Computer Science**
-- **DataScience**
-- **LeetCode**
+- **Dota2**
 
 ![LeetCode Stats](https://leetcard.jacoblin.cool/noahlias?theme=unicorn&font=Grandstander&ext=heatmap)
 
