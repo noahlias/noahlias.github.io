@@ -19,6 +19,6 @@ Hi there 👋
 - **Math**
 - **Dota2**
 
-![LeetCode Stats](https://leetcard.jacoblin.cool/noahlias?theme=unicorn&font=Grandstander&ext=heatmap)
+![LeetCode Stats](https://leetcard.jacoblin.cool/noahlias?theme=light&font=Dancing%20Script&ext=heatmap)
 
 > Ride the waves.
