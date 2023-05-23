@@ -7,7 +7,9 @@ weight: 50
 draft: false
 ---
 
-<img src='/noahlias_mj.png' alt='personal avatar'/>
+<img src='/noahlias_mj.png' width='50%' height='50%' alt='personal avatar'/>
+
+>  like Orihara Izaya. cartoon style.4k.
 
 Hi there 👋
 
