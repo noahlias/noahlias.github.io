@@ -9,7 +9,7 @@ draft: false
 
 <img src='/noahlias_mj.png' width='50%' height='50%' alt='personal avatar'/>
 
->  like Orihara Izaya. cartoon style.4k.
+> like Orihara Izaya. cartoon style.4k.
 
 Hi there 👋
 
@@ -18,7 +18,16 @@ Hi there 👋
 - **AI**
 - **Math**
 - **Dota2**
+- **Pokemon**
+
+## Stats
 
 ![LeetCode Stats](https://leetcard.jacoblin.cool/noahlias?theme=light&font=Dancing%20Script&ext=heatmap)
+
+## Ascii Art
+
+![gengar](/gengar.svg)
+
+## Quotes
 
 > Ride the waves.

@@ -1,0 +1,730 @@
+<svg viewBox="0 0 256 304" width="256" height="304" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <style>
+        rect { shape-rendering: crispEdges; }
+        text {
+            dominant-baseline: text-before-edge;
+            white-space: pre;
+            font: 14px Courier, monospace;
+            fill: #bbbbbb;
+        }
+        .u { text-decoration: underline; }
+    </style>
+    <svg style="display: none">
+        <rect id="b#000000" width="8" height="16" stroke-width="1px" stroke="#000000" style="fill: #000000"/>
+        <rect id="b#414141" width="8" height="16" stroke-width="1px" stroke="#414141" style="fill: #414141"/>
+        <rect id="b#525a6a" width="8" height="16" stroke-width="1px" stroke="#525a6a" style="fill: #525a6a"/>
+        <rect id="b#6a5a8b" width="8" height="16" stroke-width="1px" stroke="#6a5a8b" style="fill: #6a5a8b"/>
+        <rect id="b#8373bd" width="8" height="16" stroke-width="1px" stroke="#8373bd" style="fill: #8373bd"/>
+        <rect id="b#9c94de" width="8" height="16" stroke-width="1px" stroke="#9c94de" style="fill: #9c94de"/>
+        <rect id="b#bdb4cd" width="8" height="16" stroke-width="1px" stroke="#bdb4cd" style="fill: #bdb4cd"/>
+        <rect id="b#ff7b8b" width="8" height="16" stroke-width="1px" stroke="#ff7b8b" style="fill: #ff7b8b"/>
+        <rect id="b#ffb4c5" width="8" height="16" stroke-width="1px" stroke="#ffb4c5" style="fill: #ffb4c5"/>
+        <rect id="b#ffffff" width="8" height="16" stroke-width="1px" stroke="#ffffff" style="fill: #ffffff"/>
+    </svg>
+    <rect width="100%" height="100%" x="0" y="0" style="fill: #000000"/>
+    <use xlink:href="#b%23000000" x="24" y="0"/>
+    <use xlink:href="#b%238373bd" x="32" y="0"/>
+    <use xlink:href="#b%23000000" x="32" y="16"/>
+    <use xlink:href="#b%238373bd" x="40" y="16"/>
+    <use xlink:href="#b%238373bd" x="48" y="16"/>
+    <use xlink:href="#b%23000000" x="32" y="32"/>
+    <use xlink:href="#b%238373bd" x="40" y="32"/>
+    <use xlink:href="#b%238373bd" x="48" y="32"/>
+    <use xlink:href="#b%238373bd" x="56" y="32"/>
+    <use xlink:href="#b%238373bd" x="64" y="32"/>
+    <use xlink:href="#b%238373bd" x="72" y="32"/>
+    <use xlink:href="#b%238373bd" x="128" y="32"/>
+    <use xlink:href="#b%238373bd" x="136" y="32"/>
+    <use xlink:href="#b%23000000" x="144" y="32"/>
+    <use xlink:href="#b%239c94de" x="224" y="32"/>
+    <use xlink:href="#b%238373bd" x="232" y="32"/>
+    <use xlink:href="#b%238373bd" x="240" y="32"/>
+    <use xlink:href="#b%23000000" x="248" y="32"/>
+    <use xlink:href="#b%23000000" x="40" y="48"/>
+    <use xlink:href="#b%238373bd" x="48" y="48"/>
+    <use xlink:href="#b%238373bd" x="56" y="48"/>
+    <use xlink:href="#b%238373bd" x="64" y="48"/>
+    <use xlink:href="#b%238373bd" x="72" y="48"/>
+    <use xlink:href="#b%236a5a8b" x="80" y="48"/>
+    <use xlink:href="#b%236a5a8b" x="88" y="48"/>
+    <use xlink:href="#b%239c94de" x="96" y="48"/>
+    <use xlink:href="#b%238373bd" x="104" y="48"/>
+    <use xlink:href="#b%236a5a8b" x="112" y="48"/>
+    <use xlink:href="#b%239c94de" x="120" y="48"/>
+    <use xlink:href="#b%239c94de" x="128" y="48"/>
+    <use xlink:href="#b%238373bd" x="136" y="48"/>
+    <use xlink:href="#b%236a5a8b" x="144" y="48"/>
+    <use xlink:href="#b%238373bd" x="152" y="48"/>
+    <use xlink:href="#b%238373bd" x="160" y="48"/>
+    <use xlink:href="#b%23000000" x="168" y="48"/>
+    <use xlink:href="#b%238373bd" x="192" y="48"/>
+    <use xlink:href="#b%239c94de" x="200" y="48"/>
+    <use xlink:href="#b%239c94de" x="208" y="48"/>
+    <use xlink:href="#b%239c94de" x="216" y="48"/>
+    <use xlink:href="#b%238373bd" x="224" y="48"/>
+    <use xlink:href="#b%238373bd" x="232" y="48"/>
+    <use xlink:href="#b%23000000" x="240" y="48"/>
+    <use xlink:href="#b%23000000" x="48" y="64"/>
+    <use xlink:href="#b%238373bd" x="56" y="64"/>
+    <use xlink:href="#b%239c94de" x="64" y="64"/>
+    <use xlink:href="#b%239c94de" x="72" y="64"/>
+    <use xlink:href="#b%239c94de" x="80" y="64"/>
+    <use xlink:href="#b%239c94de" x="88" y="64"/>
+    <use xlink:href="#b%239c94de" x="96" y="64"/>
+    <use xlink:href="#b%239c94de" x="104" y="64"/>
+    <use xlink:href="#b%239c94de" x="112" y="64"/>
+    <use xlink:href="#b%239c94de" x="120" y="64"/>
+    <use xlink:href="#b%239c94de" x="128" y="64"/>
+    <use xlink:href="#b%239c94de" x="136" y="64"/>
+    <use xlink:href="#b%238373bd" x="144" y="64"/>
+    <use xlink:href="#b%238373bd" x="152" y="64"/>
+    <use xlink:href="#b%236a5a8b" x="160" y="64"/>
+    <use xlink:href="#b%238373bd" x="168" y="64"/>
+    <use xlink:href="#b%239c94de" x="176" y="64"/>
+    <use xlink:href="#b%239c94de" x="184" y="64"/>
+    <use xlink:href="#b%239c94de" x="192" y="64"/>
+    <use xlink:href="#b%239c94de" x="200" y="64"/>
+    <use xlink:href="#b%238373bd" x="208" y="64"/>
+    <use xlink:href="#b%238373bd" x="216" y="64"/>
+    <use xlink:href="#b%236a5a8b" x="224" y="64"/>
+    <use xlink:href="#b%23000000" x="232" y="64"/>
+    <use xlink:href="#b%23000000" x="48" y="80"/>
+    <use xlink:href="#b%239c94de" x="56" y="80"/>
+    <use xlink:href="#b%239c94de" x="64" y="80"/>
+    <use xlink:href="#b%239c94de" x="72" y="80"/>
+    <use xlink:href="#b%239c94de" x="80" y="80"/>
+    <use xlink:href="#b%239c94de" x="88" y="80"/>
+    <use xlink:href="#b%239c94de" x="96" y="80"/>
+    <use xlink:href="#b%239c94de" x="104" y="80"/>
+    <use xlink:href="#b%239c94de" x="112" y="80"/>
+    <use xlink:href="#b%239c94de" x="120" y="80"/>
+    <use xlink:href="#b%239c94de" x="128" y="80"/>
+    <use xlink:href="#b%238373bd" x="136" y="80"/>
+    <use xlink:href="#b%239c94de" x="144" y="80"/>
+    <use xlink:href="#b%238373bd" x="152" y="80"/>
+    <use xlink:href="#b%238373bd" x="160" y="80"/>
+    <use xlink:href="#b%238373bd" x="168" y="80"/>
+    <use xlink:href="#b%239c94de" x="176" y="80"/>
+    <use xlink:href="#b%239c94de" x="184" y="80"/>
+    <use xlink:href="#b%238373bd" x="192" y="80"/>
+    <use xlink:href="#b%238373bd" x="200" y="80"/>
+    <use xlink:href="#b%238373bd" x="208" y="80"/>
+    <use xlink:href="#b%236a5a8b" x="216" y="80"/>
+    <use xlink:href="#b%23000000" x="224" y="80"/>
+    <use xlink:href="#b%238373bd" x="40" y="96"/>
+    <use xlink:href="#b%239c94de" x="48" y="96"/>
+    <use xlink:href="#b%239c94de" x="56" y="96"/>
+    <use xlink:href="#b%239c94de" x="64" y="96"/>
+    <use xlink:href="#b%239c94de" x="72" y="96"/>
+    <use xlink:href="#b%239c94de" x="80" y="96"/>
+    <use xlink:href="#b%239c94de" x="88" y="96"/>
+    <use xlink:href="#b%239c94de" x="96" y="96"/>
+    <use xlink:href="#b%239c94de" x="104" y="96"/>
+    <use xlink:href="#b%239c94de" x="112" y="96"/>
+    <use xlink:href="#b%239c94de" x="120" y="96"/>
+    <use xlink:href="#b%239c94de" x="128" y="96"/>
+    <use xlink:href="#b%238373bd" x="136" y="96"/>
+    <use xlink:href="#b%239c94de" x="144" y="96"/>
+    <use xlink:href="#b%238373bd" x="152" y="96"/>
+    <use xlink:href="#b%238373bd" x="160" y="96"/>
+    <use xlink:href="#b%238373bd" x="168" y="96"/>
+    <use xlink:href="#b%238373bd" x="176" y="96"/>
+    <use xlink:href="#b%238373bd" x="184" y="96"/>
+    <use xlink:href="#b%238373bd" x="192" y="96"/>
+    <use xlink:href="#b%238373bd" x="200" y="96"/>
+    <use xlink:href="#b%236a5a8b" x="208" y="96"/>
+    <use xlink:href="#b%236a5a8b" x="216" y="96"/>
+    <use xlink:href="#b%236a5a8b" x="24" y="112"/>
+    <use xlink:href="#b%23414141" x="32" y="112"/>
+    <use xlink:href="#b%23ff7b8b" x="40" y="112"/>
+    <use xlink:href="#b%238373bd" x="48" y="112"/>
+    <use xlink:href="#b%239c94de" x="56" y="112"/>
+    <use xlink:href="#b%239c94de" x="64" y="112"/>
+    <use xlink:href="#b%239c94de" x="72" y="112"/>
+    <use xlink:href="#b%239c94de" x="80" y="112"/>
+    <use xlink:href="#b%239c94de" x="88" y="112"/>
+    <use xlink:href="#b%239c94de" x="96" y="112"/>
+    <use xlink:href="#b%239c94de" x="104" y="112"/>
+    <use xlink:href="#b%238373bd" x="112" y="112"/>
+    <use xlink:href="#b%238373bd" x="120" y="112"/>
+    <use xlink:href="#b%238373bd" x="128" y="112"/>
+    <use xlink:href="#b%23525a6a" x="136" y="112"/>
+    <use xlink:href="#b%238373bd" x="144" y="112"/>
+    <use xlink:href="#b%238373bd" x="152" y="112"/>
+    <use xlink:href="#b%238373bd" x="160" y="112"/>
+    <use xlink:href="#b%238373bd" x="168" y="112"/>
+    <use xlink:href="#b%238373bd" x="176" y="112"/>
+    <use xlink:href="#b%238373bd" x="184" y="112"/>
+    <use xlink:href="#b%238373bd" x="192" y="112"/>
+    <use xlink:href="#b%236a5a8b" x="200" y="112"/>
+    <use xlink:href="#b%236a5a8b" x="208" y="112"/>
+    <use xlink:href="#b%236a5a8b" x="216" y="112"/>
+    <use xlink:href="#b%23000000" x="224" y="112"/>
+    <use xlink:href="#b%23000000" x="8" y="128"/>
+    <use xlink:href="#b%236a5a8b" x="16" y="128"/>
+    <use xlink:href="#b%23414141" x="24" y="128"/>
+    <use xlink:href="#b%238373bd" x="32" y="128"/>
+    <use xlink:href="#b%23ffb4c5" x="40" y="128"/>
+    <use xlink:href="#b%23000000" x="48" y="128"/>
+    <use xlink:href="#b%238373bd" x="56" y="128"/>
+    <use xlink:href="#b%239c94de" x="64" y="128"/>
+    <use xlink:href="#b%239c94de" x="72" y="128"/>
+    <use xlink:href="#b%239c94de" x="80" y="128"/>
+    <use xlink:href="#b%238373bd" x="88" y="128"/>
+    <use xlink:href="#b%238373bd" x="96" y="128"/>
+    <use xlink:href="#b%238373bd" x="104" y="128"/>
+    <use xlink:href="#b%23525a6a" x="112" y="128"/>
+    <use xlink:href="#b%23ff7b8b" x="120" y="128"/>
+    <use xlink:href="#b%23ff7b8b" x="128" y="128"/>
+    <use xlink:href="#b%23ffb4c5" x="136" y="128"/>
+    <use xlink:href="#b%238373bd" x="144" y="128"/>
+    <use xlink:href="#b%238373bd" x="152" y="128"/>
+    <use xlink:href="#b%238373bd" x="160" y="128"/>
+    <use xlink:href="#b%238373bd" x="168" y="128"/>
+    <use xlink:href="#b%238373bd" x="176" y="128"/>
+    <use xlink:href="#b%238373bd" x="184" y="128"/>
+    <use xlink:href="#b%238373bd" x="192" y="128"/>
+    <use xlink:href="#b%23414141" x="200" y="128"/>
+    <use xlink:href="#b%236a5a8b" x="208" y="128"/>
+    <use xlink:href="#b%236a5a8b" x="216" y="128"/>
+    <use xlink:href="#b%23000000" x="0" y="144"/>
+    <use xlink:href="#b%236a5a8b" x="8" y="144"/>
+    <use xlink:href="#b%236a5a8b" x="16" y="144"/>
+    <use xlink:href="#b%23414141" x="24" y="144"/>
+    <use xlink:href="#b%23525a6a" x="32" y="144"/>
+    <use xlink:href="#b%238373bd" x="40" y="144"/>
+    <use xlink:href="#b%238373bd" x="48" y="144"/>
+    <use xlink:href="#b%238373bd" x="56" y="144"/>
+    <use xlink:href="#b%238373bd" x="64" y="144"/>
+    <use xlink:href="#b%238373bd" x="72" y="144"/>
+    <use xlink:href="#b%238373bd" x="80" y="144"/>
+    <use xlink:href="#b%23525a6a" x="88" y="144"/>
+    <use xlink:href="#b%23ff7b8b" x="96" y="144"/>
+    <use xlink:href="#b%23000000" x="104" y="144"/>
+    <use xlink:href="#b%23ffb4c5" x="112" y="144"/>
+    <use xlink:href="#b%23ffb4c5" x="120" y="144"/>
+    <use xlink:href="#b%23ffb4c5" x="128" y="144"/>
+    <use xlink:href="#b%238373bd" x="136" y="144"/>
+    <use xlink:href="#b%238373bd" x="144" y="144"/>
+    <use xlink:href="#b%238373bd" x="152" y="144"/>
+    <use xlink:href="#b%23525a6a" x="160" y="144"/>
+    <use xlink:href="#b%238373bd" x="168" y="144"/>
+    <use xlink:href="#b%238373bd" x="176" y="144"/>
+    <use xlink:href="#b%238373bd" x="184" y="144"/>
+    <use xlink:href="#b%238373bd" x="192" y="144"/>
+    <use xlink:href="#b%238373bd" x="200" y="144"/>
+    <use xlink:href="#b%238373bd" x="208" y="144"/>
+    <use xlink:href="#b%23414141" x="216" y="144"/>
+    <use xlink:href="#b%236a5a8b" x="224" y="144"/>
+    <use xlink:href="#b%23000000" x="232" y="144"/>
+    <use xlink:href="#b%23000000" x="24" y="160"/>
+    <use xlink:href="#b%238373bd" x="32" y="160"/>
+    <use xlink:href="#b%236a5a8b" x="40" y="160"/>
+    <use xlink:href="#b%23525a6a" x="48" y="160"/>
+    <use xlink:href="#b%23525a6a" x="56" y="160"/>
+    <use xlink:href="#b%238373bd" x="64" y="160"/>
+    <use xlink:href="#b%238373bd" x="72" y="160"/>
+    <use xlink:href="#b%238373bd" x="80" y="160"/>
+    <use xlink:href="#b%238373bd" x="88" y="160"/>
+    <use xlink:href="#b%238373bd" x="96" y="160"/>
+    <use xlink:href="#b%238373bd" x="104" y="160"/>
+    <use xlink:href="#b%238373bd" x="112" y="160"/>
+    <use xlink:href="#b%238373bd" x="120" y="160"/>
+    <use xlink:href="#b%238373bd" x="128" y="160"/>
+    <use xlink:href="#b%23525a6a" x="136" y="160"/>
+    <use xlink:href="#b%23525a6a" x="144" y="160"/>
+    <use xlink:href="#b%236a5a8b" x="152" y="160"/>
+    <use xlink:href="#b%238373bd" x="160" y="160"/>
+    <use xlink:href="#b%238373bd" x="168" y="160"/>
+    <use xlink:href="#b%238373bd" x="176" y="160"/>
+    <use xlink:href="#b%238373bd" x="184" y="160"/>
+    <use xlink:href="#b%238373bd" x="192" y="160"/>
+    <use xlink:href="#b%238373bd" x="200" y="160"/>
+    <use xlink:href="#b%238373bd" x="208" y="160"/>
+    <use xlink:href="#b%238373bd" x="216" y="160"/>
+    <use xlink:href="#b%23000000" x="224" y="160"/>
+    <use xlink:href="#b%23000000" x="32" y="176"/>
+    <use xlink:href="#b%238373bd" x="40" y="176"/>
+    <use xlink:href="#b%236a5a8b" x="48" y="176"/>
+    <use xlink:href="#b%23bdb4cd" x="56" y="176"/>
+    <use xlink:href="#b%23ffffff" x="64" y="176"/>
+    <use xlink:href="#b%23bdb4cd" x="72" y="176"/>
+    <use xlink:href="#b%23ffffff" x="80" y="176"/>
+    <use xlink:href="#b%23ffffff" x="88" y="176"/>
+    <use xlink:href="#b%23bdb4cd" x="96" y="176"/>
+    <use xlink:href="#b%23ffffff" x="104" y="176"/>
+    <use xlink:href="#b%23ffffff" x="112" y="176"/>
+    <use xlink:href="#b%23bdb4cd" x="120" y="176"/>
+    <use xlink:href="#b%23ffffff" x="128" y="176"/>
+    <use xlink:href="#b%23ffffff" x="136" y="176"/>
+    <use xlink:href="#b%236a5a8b" x="144" y="176"/>
+    <use xlink:href="#b%238373bd" x="152" y="176"/>
+    <use xlink:href="#b%238373bd" x="160" y="176"/>
+    <use xlink:href="#b%238373bd" x="168" y="176"/>
+    <use xlink:href="#b%23414141" x="176" y="176"/>
+    <use xlink:href="#b%238373bd" x="184" y="176"/>
+    <use xlink:href="#b%238373bd" x="192" y="176"/>
+    <use xlink:href="#b%238373bd" x="200" y="176"/>
+    <use xlink:href="#b%238373bd" x="208" y="176"/>
+    <use xlink:href="#b%236a5a8b" x="216" y="176"/>
+    <use xlink:href="#b%238373bd" x="224" y="176"/>
+    <use xlink:href="#b%23000000" x="48" y="192"/>
+    <use xlink:href="#b%238373bd" x="56" y="192"/>
+    <use xlink:href="#b%236a5a8b" x="64" y="192"/>
+    <use xlink:href="#b%236a5a8b" x="72" y="192"/>
+    <use xlink:href="#b%23ffffff" x="80" y="192"/>
+    <use xlink:href="#b%23ffffff" x="88" y="192"/>
+    <use xlink:href="#b%23bdb4cd" x="96" y="192"/>
+    <use xlink:href="#b%23ffffff" x="104" y="192"/>
+    <use xlink:href="#b%23ffffff" x="112" y="192"/>
+    <use xlink:href="#b%236a5a8b" x="120" y="192"/>
+    <use xlink:href="#b%236a5a8b" x="128" y="192"/>
+    <use xlink:href="#b%238373bd" x="136" y="192"/>
+    <use xlink:href="#b%238373bd" x="144" y="192"/>
+    <use xlink:href="#b%238373bd" x="152" y="192"/>
+    <use xlink:href="#b%238373bd" x="160" y="192"/>
+    <use xlink:href="#b%238373bd" x="168" y="192"/>
+    <use xlink:href="#b%238373bd" x="176" y="192"/>
+    <use xlink:href="#b%238373bd" x="184" y="192"/>
+    <use xlink:href="#b%23414141" x="192" y="192"/>
+    <use xlink:href="#b%23414141" x="200" y="192"/>
+    <use xlink:href="#b%238373bd" x="208" y="192"/>
+    <use xlink:href="#b%23000000" x="216" y="192"/>
+    <use xlink:href="#b%23000000" x="48" y="208"/>
+    <use xlink:href="#b%236a5a8b" x="56" y="208"/>
+    <use xlink:href="#b%23525a6a" x="64" y="208"/>
+    <use xlink:href="#b%238373bd" x="72" y="208"/>
+    <use xlink:href="#b%238373bd" x="80" y="208"/>
+    <use xlink:href="#b%238373bd" x="88" y="208"/>
+    <use xlink:href="#b%238373bd" x="96" y="208"/>
+    <use xlink:href="#b%238373bd" x="104" y="208"/>
+    <use xlink:href="#b%238373bd" x="112" y="208"/>
+    <use xlink:href="#b%238373bd" x="120" y="208"/>
+    <use xlink:href="#b%238373bd" x="128" y="208"/>
+    <use xlink:href="#b%238373bd" x="136" y="208"/>
+    <use xlink:href="#b%238373bd" x="144" y="208"/>
+    <use xlink:href="#b%238373bd" x="152" y="208"/>
+    <use xlink:href="#b%238373bd" x="160" y="208"/>
+    <use xlink:href="#b%238373bd" x="168" y="208"/>
+    <use xlink:href="#b%236a5a8b" x="176" y="208"/>
+    <use xlink:href="#b%236a5a8b" x="184" y="208"/>
+    <use xlink:href="#b%236a5a8b" x="192" y="208"/>
+    <use xlink:href="#b%236a5a8b" x="200" y="208"/>
+    <use xlink:href="#b%23414141" x="208" y="208"/>
+    <use xlink:href="#b%236a5a8b" x="216" y="208"/>
+    <use xlink:href="#b%236a5a8b" x="224" y="208"/>
+    <use xlink:href="#b%23000000" x="56" y="224"/>
+    <use xlink:href="#b%236a5a8b" x="64" y="224"/>
+    <use xlink:href="#b%236a5a8b" x="72" y="224"/>
+    <use xlink:href="#b%236a5a8b" x="80" y="224"/>
+    <use xlink:href="#b%23525a6a" x="88" y="224"/>
+    <use xlink:href="#b%23414141" x="96" y="224"/>
+    <use xlink:href="#b%23000000" x="104" y="224"/>
+    <use xlink:href="#b%238373bd" x="112" y="224"/>
+    <use xlink:href="#b%238373bd" x="120" y="224"/>
+    <use xlink:href="#b%238373bd" x="128" y="224"/>
+    <use xlink:href="#b%238373bd" x="136" y="224"/>
+    <use xlink:href="#b%236a5a8b" x="144" y="224"/>
+    <use xlink:href="#b%236a5a8b" x="152" y="224"/>
+    <use xlink:href="#b%236a5a8b" x="160" y="224"/>
+    <use xlink:href="#b%236a5a8b" x="168" y="224"/>
+    <use xlink:href="#b%236a5a8b" x="176" y="224"/>
+    <use xlink:href="#b%236a5a8b" x="184" y="224"/>
+    <use xlink:href="#b%236a5a8b" x="192" y="224"/>
+    <use xlink:href="#b%23414141" x="200" y="224"/>
+    <use xlink:href="#b%236a5a8b" x="208" y="224"/>
+    <use xlink:href="#b%236a5a8b" x="216" y="224"/>
+    <use xlink:href="#b%23000000" x="224" y="224"/>
+    <use xlink:href="#b%23000000" x="232" y="224"/>
+    <use xlink:href="#b%23000000" x="72" y="240"/>
+    <use xlink:href="#b%23000000" x="80" y="240"/>
+    <use xlink:href="#b%23000000" x="88" y="240"/>
+    <use xlink:href="#b%23000000" x="136" y="240"/>
+    <use xlink:href="#b%236a5a8b" x="144" y="240"/>
+    <use xlink:href="#b%236a5a8b" x="152" y="240"/>
+    <use xlink:href="#b%236a5a8b" x="160" y="240"/>
+    <use xlink:href="#b%236a5a8b" x="168" y="240"/>
+    <use xlink:href="#b%236a5a8b" x="176" y="240"/>
+    <use xlink:href="#b%236a5a8b" x="184" y="240"/>
+    <use xlink:href="#b%236a5a8b" x="192" y="240"/>
+    <use xlink:href="#b%23000000" x="200" y="240"/>
+    <use xlink:href="#b%23000000" x="144" y="256"/>
+    <use xlink:href="#b%23000000" x="152" y="256"/>
+    <use xlink:href="#b%23000000" x="160" y="256"/>
+    <use xlink:href="#b%238373bd" x="168" y="256"/>
+    <use xlink:href="#b%238373bd" x="176" y="256"/>
+    <use xlink:href="#b%23000000" x="184" y="256"/>
+    <text x="24" y="0" style="fill: #000000">▀</text>
+    <text x="32" y="0" style="fill: #000000">▀</text>
+    <text x="40" y="0" style="fill: #000000">▄</text>
+    <text x="24" y="16" style="fill: #000000">▀</text>
+    <text x="32" y="16" style="fill: #8373bd">▀</text>
+    <text x="40" y="16" style="fill: #8373bd">▀</text>
+    <text x="48" y="16" style="fill: #000000">▀</text>
+    <text x="56" y="16" style="fill: #000000">▄</text>
+    <text x="64" y="16" style="fill: #000000">▄</text>
+    <text x="136" y="16" style="fill: #000000">▄</text>
+    <text x="144" y="16" style="fill: #000000">▄</text>
+    <text x="240" y="16" style="fill: #000000">▄</text>
+    <text x="248" y="16" style="fill: #000000">▄</text>
+    <text x="32" y="32" style="fill: #000000">▀</text>
+    <text x="40" y="32" style="fill: #8373bd">▀</text>
+    <text x="48" y="32" style="fill: #8373bd">▀</text>
+    <text x="56" y="32" style="fill: #8373bd">▀</text>
+    <text x="64" y="32" style="fill: #6a5a8b">▀</text>
+    <text x="72" y="32" style="fill: #000000">▀</text>
+    <text x="80" y="32" style="fill: #000000">▄</text>
+    <text x="104" y="32" style="fill: #000000">▄</text>
+    <text x="120" y="32" style="fill: #000000">▄</text>
+    <text x="128" y="32" style="fill: #000000">▀</text>
+    <text x="136" y="32" style="fill: #8373bd">▀</text>
+    <text x="144" y="32" style="fill: #000000">▀</text>
+    <text x="160" y="32" style="fill: #000000">▄</text>
+    <text x="168" y="32" style="fill: #000000">▄</text>
+    <text x="208" y="32" style="fill: #000000">▄</text>
+    <text x="216" y="32" style="fill: #000000">▄</text>
+    <text x="224" y="32" style="fill: #000000">▀</text>
+    <text x="232" y="32" style="fill: #000000">▀</text>
+    <text x="240" y="32" style="fill: #8373bd">▀</text>
+    <text x="248" y="32" style="fill: #000000">▀</text>
+    <text x="40" y="48" style="fill: #000000">▀</text>
+    <text x="48" y="48" style="fill: #8373bd">▀</text>
+    <text x="56" y="48" style="fill: #8373bd">▀</text>
+    <text x="64" y="48" style="fill: #8373bd">▀</text>
+    <text x="72" y="48" style="fill: #8373bd">▀</text>
+    <text x="80" y="48" style="fill: #8373bd">▀</text>
+    <text x="88" y="48" style="fill: #000000">▀</text>
+    <text x="96" y="48" style="fill: #000000">▀</text>
+    <text x="104" y="48" style="fill: #8373bd">▀</text>
+    <text x="112" y="48" style="fill: #000000">▀</text>
+    <text x="120" y="48" style="fill: #6a5a8b">▀</text>
+    <text x="128" y="48" style="fill: #9c94de">▀</text>
+    <text x="136" y="48" style="fill: #8373bd">▀</text>
+    <text x="144" y="48" style="fill: #000000">▀</text>
+    <text x="152" y="48" style="fill: #000000">▀</text>
+    <text x="160" y="48" style="fill: #8373bd">▀</text>
+    <text x="168" y="48" style="fill: #000000">▀</text>
+    <text x="184" y="48" style="fill: #000000">▄</text>
+    <text x="192" y="48" style="fill: #000000">▀</text>
+    <text x="200" y="48" style="fill: #000000">▀</text>
+    <text x="208" y="48" style="fill: #8373bd">▀</text>
+    <text x="216" y="48" style="fill: #9c94de">▀</text>
+    <text x="224" y="48" style="fill: #8373bd">▀</text>
+    <text x="232" y="48" style="fill: #8373bd">▀</text>
+    <text x="240" y="48" style="fill: #000000">▀</text>
+    <text x="40" y="64" style="fill: #000000">▀</text>
+    <text x="48" y="64" style="fill: #8373bd">▀</text>
+    <text x="56" y="64" style="fill: #8373bd">▀</text>
+    <text x="64" y="64" style="fill: #8373bd">▀</text>
+    <text x="72" y="64" style="fill: #8373bd">▀</text>
+    <text x="80" y="64" style="fill: #9c94de">▀</text>
+    <text x="88" y="64" style="fill: #9c94de">▀</text>
+    <text x="96" y="64" style="fill: #9c94de">▀</text>
+    <text x="104" y="64" style="fill: #9c94de">▀</text>
+    <text x="112" y="64" style="fill: #9c94de">▀</text>
+    <text x="120" y="64" style="fill: #9c94de">▀</text>
+    <text x="128" y="64" style="fill: #9c94de">▀</text>
+    <text x="136" y="64" style="fill: #8373bd">▀</text>
+    <text x="144" y="64" style="fill: #8373bd">▀</text>
+    <text x="152" y="64" style="fill: #8373bd">▀</text>
+    <text x="160" y="64" style="fill: #8373bd">▀</text>
+    <text x="168" y="64" style="fill: #000000">▀</text>
+    <text x="176" y="64" style="fill: #000000">▀</text>
+    <text x="184" y="64" style="fill: #9c94de">▀</text>
+    <text x="192" y="64" style="fill: #9c94de">▀</text>
+    <text x="200" y="64" style="fill: #9c94de">▀</text>
+    <text x="208" y="64" style="fill: #9c94de">▀</text>
+    <text x="216" y="64" style="fill: #8373bd">▀</text>
+    <text x="224" y="64" style="fill: #8373bd">▀</text>
+    <text x="232" y="64" style="fill: #000000">▀</text>
+    <text x="48" y="80" style="fill: #000000">▀</text>
+    <text x="56" y="80" style="fill: #9c94de">▀</text>
+    <text x="64" y="80" style="fill: #9c94de">▀</text>
+    <text x="72" y="80" style="fill: #9c94de">▀</text>
+    <text x="80" y="80" style="fill: #9c94de">▀</text>
+    <text x="88" y="80" style="fill: #9c94de">▀</text>
+    <text x="96" y="80" style="fill: #9c94de">▀</text>
+    <text x="104" y="80" style="fill: #9c94de">▀</text>
+    <text x="112" y="80" style="fill: #9c94de">▀</text>
+    <text x="120" y="80" style="fill: #9c94de">▀</text>
+    <text x="128" y="80" style="fill: #9c94de">▀</text>
+    <text x="136" y="80" style="fill: #9c94de">▀</text>
+    <text x="144" y="80" style="fill: #8373bd">▀</text>
+    <text x="152" y="80" style="fill: #8373bd">▀</text>
+    <text x="160" y="80" style="fill: #8373bd">▀</text>
+    <text x="168" y="80" style="fill: #9c94de">▀</text>
+    <text x="176" y="80" style="fill: #9c94de">▀</text>
+    <text x="184" y="80" style="fill: #9c94de">▀</text>
+    <text x="192" y="80" style="fill: #9c94de">▀</text>
+    <text x="200" y="80" style="fill: #8373bd">▀</text>
+    <text x="208" y="80" style="fill: #8373bd">▀</text>
+    <text x="216" y="80" style="fill: #8373bd">▀</text>
+    <text x="224" y="80" style="fill: #000000">▀</text>
+    <text x="32" y="96" style="fill: #000000">▄</text>
+    <text x="40" y="96" style="fill: #000000">▀</text>
+    <text x="48" y="96" style="fill: #9c94de">▀</text>
+    <text x="56" y="96" style="fill: #9c94de">▀</text>
+    <text x="64" y="96" style="fill: #9c94de">▀</text>
+    <text x="72" y="96" style="fill: #9c94de">▀</text>
+    <text x="80" y="96" style="fill: #9c94de">▀</text>
+    <text x="88" y="96" style="fill: #9c94de">▀</text>
+    <text x="96" y="96" style="fill: #9c94de">▀</text>
+    <text x="104" y="96" style="fill: #9c94de">▀</text>
+    <text x="112" y="96" style="fill: #9c94de">▀</text>
+    <text x="120" y="96" style="fill: #9c94de">▀</text>
+    <text x="128" y="96" style="fill: #8373bd">▀</text>
+    <text x="136" y="96" style="fill: #9c94de">▀</text>
+    <text x="144" y="96" style="fill: #8373bd">▀</text>
+    <text x="152" y="96" style="fill: #9c94de">▀</text>
+    <text x="160" y="96" style="fill: #8373bd">▀</text>
+    <text x="168" y="96" style="fill: #8373bd">▀</text>
+    <text x="176" y="96" style="fill: #8373bd">▀</text>
+    <text x="184" y="96" style="fill: #8373bd">▀</text>
+    <text x="192" y="96" style="fill: #8373bd">▀</text>
+    <text x="200" y="96" style="fill: #8373bd">▀</text>
+    <text x="208" y="96" style="fill: #8373bd">▀</text>
+    <text x="216" y="96" style="fill: #000000">▀</text>
+    <text x="224" y="96" style="fill: #000000">▄</text>
+    <text x="16" y="112" style="fill: #000000">▄</text>
+    <text x="24" y="112" style="fill: #000000">▀</text>
+    <text x="32" y="112" style="fill: #414141">▀</text>
+    <text x="40" y="112" style="fill: #525a6a">▀</text>
+    <text x="48" y="112" style="fill: #9c94de">▀</text>
+    <text x="56" y="112" style="fill: #9c94de">▀</text>
+    <text x="64" y="112" style="fill: #9c94de">▀</text>
+    <text x="72" y="112" style="fill: #9c94de">▀</text>
+    <text x="80" y="112" style="fill: #9c94de">▀</text>
+    <text x="88" y="112" style="fill: #9c94de">▀</text>
+    <text x="96" y="112" style="fill: #9c94de">▀</text>
+    <text x="104" y="112" style="fill: #9c94de">▀</text>
+    <text x="112" y="112" style="fill: #9c94de">▀</text>
+    <text x="120" y="112" style="fill: #9c94de">▀</text>
+    <text x="128" y="112" style="fill: #8373bd">▀</text>
+    <text x="136" y="112" style="fill: #8373bd">▀</text>
+    <text x="144" y="112" style="fill: #8373bd">▀</text>
+    <text x="152" y="112" style="fill: #8373bd">▀</text>
+    <text x="160" y="112" style="fill: #8373bd">▀</text>
+    <text x="168" y="112" style="fill: #8373bd">▀</text>
+    <text x="176" y="112" style="fill: #8373bd">▀</text>
+    <text x="184" y="112" style="fill: #8373bd">▀</text>
+    <text x="192" y="112" style="fill: #8373bd">▀</text>
+    <text x="200" y="112" style="fill: #8373bd">▀</text>
+    <text x="208" y="112" style="fill: #6a5a8b">▀</text>
+    <text x="216" y="112" style="fill: #6a5a8b">▀</text>
+    <text x="224" y="112" style="fill: #6a5a8b">▀</text>
+    <text x="232" y="112" style="fill: #000000">▀</text>
+    <text x="8" y="128" style="fill: #000000">▀</text>
+    <text x="16" y="128" style="fill: #6a5a8b">▀</text>
+    <text x="24" y="128" style="fill: #414141">▀</text>
+    <text x="32" y="128" style="fill: #8373bd">▀</text>
+    <text x="40" y="128" style="fill: #ffb4c5">▀</text>
+    <text x="48" y="128" style="fill: #000000">▀</text>
+    <text x="56" y="128" style="fill: #9c94de">▀</text>
+    <text x="64" y="128" style="fill: #9c94de">▀</text>
+    <text x="72" y="128" style="fill: #9c94de">▀</text>
+    <text x="80" y="128" style="fill: #9c94de">▀</text>
+    <text x="88" y="128" style="fill: #9c94de">▀</text>
+    <text x="96" y="128" style="fill: #8373bd">▀</text>
+    <text x="104" y="128" style="fill: #8373bd">▀</text>
+    <text x="112" y="128" style="fill: #8373bd">▀</text>
+    <text x="120" y="128" style="fill: #525a6a">▀</text>
+    <text x="128" y="128" style="fill: #525a6a">▀</text>
+    <text x="136" y="128" style="fill: #ff7b8b">▀</text>
+    <text x="144" y="128" style="fill: #8373bd">▀</text>
+    <text x="152" y="128" style="fill: #8373bd">▀</text>
+    <text x="160" y="128" style="fill: #8373bd">▀</text>
+    <text x="168" y="128" style="fill: #8373bd">▀</text>
+    <text x="176" y="128" style="fill: #8373bd">▀</text>
+    <text x="184" y="128" style="fill: #8373bd">▀</text>
+    <text x="192" y="128" style="fill: #8373bd">▀</text>
+    <text x="200" y="128" style="fill: #6a5a8b">▀</text>
+    <text x="208" y="128" style="fill: #6a5a8b">▀</text>
+    <text x="216" y="128" style="fill: #000000">▀</text>
+    <text x="224" y="128" style="fill: #000000">▄</text>
+    <text x="232" y="128" style="fill: #000000">▄</text>
+    <text x="0" y="144" style="fill: #000000">▀</text>
+    <text x="8" y="144" style="fill: #6a5a8b">▀</text>
+    <text x="16" y="144" style="fill: #6a5a8b">▀</text>
+    <text x="24" y="144" style="fill: #414141">▀</text>
+    <text x="32" y="144" style="fill: #8373bd">▀</text>
+    <text x="40" y="144" style="fill: #8373bd">▀</text>
+    <text x="48" y="144" style="fill: #ff7b8b">▀</text>
+    <text x="56" y="144" style="fill: #525a6a">▀</text>
+    <text x="64" y="144" style="fill: #8373bd">▀</text>
+    <text x="72" y="144" style="fill: #8373bd">▀</text>
+    <text x="80" y="144" style="fill: #8373bd">▀</text>
+    <text x="88" y="144" style="fill: #8373bd">▀</text>
+    <text x="96" y="144" style="fill: #525a6a">▀</text>
+    <text x="104" y="144" style="fill: #000000">▀</text>
+    <text x="112" y="144" style="fill: #ff7b8b">▀</text>
+    <text x="120" y="144" style="fill: #ffb4c5">▀</text>
+    <text x="128" y="144" style="fill: #ffb4c5">▀</text>
+    <text x="136" y="144" style="fill: #bd8bc5">▀</text>
+    <text x="144" y="144" style="fill: #8373bd">▀</text>
+    <text x="152" y="144" style="fill: #8373bd">▀</text>
+    <text x="160" y="144" style="fill: #8373bd">▀</text>
+    <text x="168" y="144" style="fill: #8373bd">▀</text>
+    <text x="176" y="144" style="fill: #8373bd">▀</text>
+    <text x="184" y="144" style="fill: #8373bd">▀</text>
+    <text x="192" y="144" style="fill: #8373bd">▀</text>
+    <text x="200" y="144" style="fill: #8373bd">▀</text>
+    <text x="208" y="144" style="fill: #414141">▀</text>
+    <text x="216" y="144" style="fill: #6a5a8b">▀</text>
+    <text x="224" y="144" style="fill: #6a5a8b">▀</text>
+    <text x="232" y="144" style="fill: #6a5a8b">▀</text>
+    <text x="240" y="144" style="fill: #000000">▀</text>
+    <text x="8" y="160" style="fill: #000000">▀</text>
+    <text x="16" y="160" style="fill: #000000">▀</text>
+    <text x="24" y="160" style="fill: #414141">▀</text>
+    <text x="32" y="160" style="fill: #6a5a8b">▀</text>
+    <text x="40" y="160" style="fill: #525a6a">▀</text>
+    <text x="48" y="160" style="fill: #8373bd">▀</text>
+    <text x="56" y="160" style="fill: #8373bd">▀</text>
+    <text x="64" y="160" style="fill: #8373bd">▀</text>
+    <text x="72" y="160" style="fill: #8373bd">▀</text>
+    <text x="80" y="160" style="fill: #8373bd">▀</text>
+    <text x="88" y="160" style="fill: #8373bd">▀</text>
+    <text x="96" y="160" style="fill: #8373bd">▀</text>
+    <text x="104" y="160" style="fill: #bd8bc5">▀</text>
+    <text x="112" y="160" style="fill: #ffb4c5">▀</text>
+    <text x="120" y="160" style="fill: #ffb4c5">▀</text>
+    <text x="128" y="160" style="fill: #8373bd">▀</text>
+    <text x="136" y="160" style="fill: #8373bd">▀</text>
+    <text x="144" y="160" style="fill: #8373bd">▀</text>
+    <text x="152" y="160" style="fill: #525a6a">▀</text>
+    <text x="160" y="160" style="fill: #6a5a8b">▀</text>
+    <text x="168" y="160" style="fill: #8373bd">▀</text>
+    <text x="176" y="160" style="fill: #8373bd">▀</text>
+    <text x="184" y="160" style="fill: #8373bd">▀</text>
+    <text x="192" y="160" style="fill: #8373bd">▀</text>
+    <text x="200" y="160" style="fill: #8373bd">▀</text>
+    <text x="208" y="160" style="fill: #8373bd">▀</text>
+    <text x="216" y="160" style="fill: #414141">▀</text>
+    <text x="224" y="160" style="fill: #000000">▀</text>
+    <text x="32" y="176" style="fill: #000000">▀</text>
+    <text x="40" y="176" style="fill: #6a5a8b">▀</text>
+    <text x="48" y="176" style="fill: #ffffff">▀</text>
+    <text x="56" y="176" style="fill: #bdb4cd">▀</text>
+    <text x="64" y="176" style="fill: #525a6a">▀</text>
+    <text x="72" y="176" style="fill: #525a6a">▀</text>
+    <text x="80" y="176" style="fill: #525a6a">▀</text>
+    <text x="88" y="176" style="fill: #525a6a">▀</text>
+    <text x="96" y="176" style="fill: #525a6a">▀</text>
+    <text x="104" y="176" style="fill: #525a6a">▀</text>
+    <text x="112" y="176" style="fill: #525a6a">▀</text>
+    <text x="120" y="176" style="fill: #525a6a">▀</text>
+    <text x="128" y="176" style="fill: #525a6a">▀</text>
+    <text x="136" y="176" style="fill: #ffffff">▀</text>
+    <text x="144" y="176" style="fill: #ffffff">▀</text>
+    <text x="152" y="176" style="fill: #6a5a8b">▀</text>
+    <text x="160" y="176" style="fill: #8373bd">▀</text>
+    <text x="168" y="176" style="fill: #8373bd">▀</text>
+    <text x="176" y="176" style="fill: #414141">▀</text>
+    <text x="184" y="176" style="fill: #8373bd">▀</text>
+    <text x="192" y="176" style="fill: #8373bd">▀</text>
+    <text x="200" y="176" style="fill: #8373bd">▀</text>
+    <text x="208" y="176" style="fill: #8373bd">▀</text>
+    <text x="216" y="176" style="fill: #8373bd">▀</text>
+    <text x="224" y="176" style="fill: #000000">▀</text>
+    <text x="232" y="176" style="fill: #000000">▄</text>
+    <text x="40" y="192" style="fill: #000000">▀</text>
+    <text x="48" y="192" style="fill: #8373bd">▀</text>
+    <text x="56" y="192" style="fill: #6a5a8b">▀</text>
+    <text x="64" y="192" style="fill: #ffffff">▀</text>
+    <text x="72" y="192" style="fill: #bdb4cd">▀</text>
+    <text x="80" y="192" style="fill: #ffffff">▀</text>
+    <text x="88" y="192" style="fill: #ffffff">▀</text>
+    <text x="96" y="192" style="fill: #bdb4cd">▀</text>
+    <text x="104" y="192" style="fill: #ffffff">▀</text>
+    <text x="112" y="192" style="fill: #ffffff">▀</text>
+    <text x="120" y="192" style="fill: #bdb4cd">▀</text>
+    <text x="128" y="192" style="fill: #ffffff">▀</text>
+    <text x="136" y="192" style="fill: #6a5a8b">▀</text>
+    <text x="144" y="192" style="fill: #8373bd">▀</text>
+    <text x="152" y="192" style="fill: #8373bd">▀</text>
+    <text x="160" y="192" style="fill: #8373bd">▀</text>
+    <text x="168" y="192" style="fill: #8373bd">▀</text>
+    <text x="176" y="192" style="fill: #8373bd">▀</text>
+    <text x="184" y="192" style="fill: #414141">▀</text>
+    <text x="192" y="192" style="fill: #8373bd">▀</text>
+    <text x="200" y="192" style="fill: #8373bd">▀</text>
+    <text x="208" y="192" style="fill: #6a5a8b">▀</text>
+    <text x="216" y="192" style="fill: #8373bd">▀</text>
+    <text x="224" y="192" style="fill: #000000">▀</text>
+    <text x="48" y="208" style="fill: #000000">▀</text>
+    <text x="56" y="208" style="fill: #525a6a">▀</text>
+    <text x="64" y="208" style="fill: #8373bd">▀</text>
+    <text x="72" y="208" style="fill: #8373bd">▀</text>
+    <text x="80" y="208" style="fill: #6a5a8b">▀</text>
+    <text x="88" y="208" style="fill: #6a5a8b">▀</text>
+    <text x="96" y="208" style="fill: #6a5a8b">▀</text>
+    <text x="104" y="208" style="fill: #6a5a8b">▀</text>
+    <text x="112" y="208" style="fill: #6a5a8b">▀</text>
+    <text x="120" y="208" style="fill: #8373bd">▀</text>
+    <text x="128" y="208" style="fill: #8373bd">▀</text>
+    <text x="136" y="208" style="fill: #8373bd">▀</text>
+    <text x="144" y="208" style="fill: #8373bd">▀</text>
+    <text x="152" y="208" style="fill: #8373bd">▀</text>
+    <text x="160" y="208" style="fill: #8373bd">▀</text>
+    <text x="168" y="208" style="fill: #8373bd">▀</text>
+    <text x="176" y="208" style="fill: #8373bd">▀</text>
+    <text x="184" y="208" style="fill: #6a5a8b">▀</text>
+    <text x="192" y="208" style="fill: #6a5a8b">▀</text>
+    <text x="200" y="208" style="fill: #6a5a8b">▀</text>
+    <text x="208" y="208" style="fill: #414141">▀</text>
+    <text x="216" y="208" style="fill: #6a5a8b">▀</text>
+    <text x="224" y="208" style="fill: #000000">▀</text>
+    <text x="232" y="208" style="fill: #000000">▄</text>
+    <text x="56" y="224" style="fill: #000000">▀</text>
+    <text x="64" y="224" style="fill: #6a5a8b">▀</text>
+    <text x="72" y="224" style="fill: #525a6a">▀</text>
+    <text x="80" y="224" style="fill: #525a6a">▀</text>
+    <text x="88" y="224" style="fill: #8373bd">▀</text>
+    <text x="96" y="224" style="fill: #8373bd">▀</text>
+    <text x="104" y="224" style="fill: #8373bd">▀</text>
+    <text x="112" y="224" style="fill: #8373bd">▀</text>
+    <text x="120" y="224" style="fill: #8373bd">▀</text>
+    <text x="128" y="224" style="fill: #8373bd">▀</text>
+    <text x="136" y="224" style="fill: #8373bd">▀</text>
+    <text x="144" y="224" style="fill: #8373bd">▀</text>
+    <text x="152" y="224" style="fill: #8373bd">▀</text>
+    <text x="160" y="224" style="fill: #8373bd">▀</text>
+    <text x="168" y="224" style="fill: #6a5a8b">▀</text>
+    <text x="176" y="224" style="fill: #6a5a8b">▀</text>
+    <text x="184" y="224" style="fill: #6a5a8b">▀</text>
+    <text x="192" y="224" style="fill: #6a5a8b">▀</text>
+    <text x="200" y="224" style="fill: #6a5a8b">▀</text>
+    <text x="208" y="224" style="fill: #414141">▀</text>
+    <text x="216" y="224" style="fill: #6a5a8b">▀</text>
+    <text x="224" y="224" style="fill: #6a5a8b">▀</text>
+    <text x="232" y="224" style="fill: #6a5a8b">▀</text>
+    <text x="240" y="224" style="fill: #000000">▀</text>
+    <text x="64" y="240" style="fill: #000000">▀</text>
+    <text x="72" y="240" style="fill: #6a5a8b">▀</text>
+    <text x="80" y="240" style="fill: #6a5a8b">▀</text>
+    <text x="88" y="240" style="fill: #6a5a8b">▀</text>
+    <text x="96" y="240" style="fill: #000000">▀</text>
+    <text x="112" y="240" style="fill: #000000">▀</text>
+    <text x="120" y="240" style="fill: #000000">▀</text>
+    <text x="128" y="240" style="fill: #000000">▀</text>
+    <text x="136" y="240" style="fill: #000000">▀</text>
+    <text x="144" y="240" style="fill: #6a5a8b">▀</text>
+    <text x="152" y="240" style="fill: #6a5a8b">▀</text>
+    <text x="160" y="240" style="fill: #6a5a8b">▀</text>
+    <text x="168" y="240" style="fill: #6a5a8b">▀</text>
+    <text x="176" y="240" style="fill: #6a5a8b">▀</text>
+    <text x="184" y="240" style="fill: #6a5a8b">▀</text>
+    <text x="192" y="240" style="fill: #6a5a8b">▀</text>
+    <text x="200" y="240" style="fill: #414141">▀</text>
+    <text x="208" y="240" style="fill: #000000">▀</text>
+    <text x="216" y="240" style="fill: #000000">▀</text>
+    <text x="144" y="256" style="fill: #000000">▀</text>
+    <text x="152" y="256" style="fill: #8373bd">▀</text>
+    <text x="160" y="256" style="fill: #6a5a8b">▀</text>
+    <text x="168" y="256" style="fill: #6a5a8b">▀</text>
+    <text x="176" y="256" style="fill: #6a5a8b">▀</text>
+    <text x="184" y="256" style="fill: #6a5a8b">▀</text>
+    <text x="192" y="256" style="fill: #000000">▀</text>
+    <text x="168" y="272" style="fill: #000000">▀</text>
+    <text x="176" y="272" style="fill: #000000">▀</text>
+</svg>
