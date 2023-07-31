@@ -27,7 +27,7 @@ rotate n xs = zipWith const (drop n (cycle xs)) xs
 
 ## Part 2
 
-第二部分就是在第一部分上_rotate_的时候修改了窗口长度,改成了字符串的长度的一半,基本没啥区别.
+第二部分就是在第一部分上*rotate*的时候修改了窗口长度,改成了字符串的长度的一半,基本没啥区别.
 
 ## Summary
 
