@@ -1,0 +1,117 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>Day 3:Spiral Memory - Noahlias's Blog</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="Noahlias"><meta name=description content="Day3 螺旋记忆，这个标题就很有意思，实际它的实现也很有意思 Part 1 第一部分大致讲解了就是一个螺旋的情况, 我用手绘图描述一下,基本就懂了 其实转换为一个"><meta name=keywords content="Coding,Blog,Life"><meta name=generator content="Hugo 0.110.0 with theme even"><link rel=canonical href=https://noahlias.github.io/post/haskell_practice_day_3/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet><meta property="og:title" content="Day 3:Spiral Memory"><meta property="og:description" content="Day3 螺旋记忆，这个标题就很有意思，实际它的实现也很有意思 Part 1 第一部分大致讲解了就是一个螺旋的情况, 我用手绘图描述一下,基本就懂了 其实转换为一个"><meta property="og:type" content="article"><meta property="og:url" content="https://noahlias.github.io/post/haskell_practice_day_3/"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-07-31T15:01:51+08:00"><meta property="article:modified_time" content="2023-07-31T15:01:51+08:00"><meta itemprop=name content="Day 3:Spiral Memory"><meta itemprop=description content="Day3 螺旋记忆，这个标题就很有意思，实际它的实现也很有意思 Part 1 第一部分大致讲解了就是一个螺旋的情况, 我用手绘图描述一下,基本就懂了 其实转换为一个"><meta itemprop=datePublished content="2023-07-31T15:01:51+08:00"><meta itemprop=dateModified content="2023-07-31T15:01:51+08:00"><meta itemprop=wordCount content="765"><meta itemprop=keywords content="Advent,"><meta name=twitter:card content="summary"><meta name=twitter:title content="Day 3:Spiral Memory"><meta name=twitter:description content="Day3 螺旋记忆，这个标题就很有意思，实际它的实现也很有意思 Part 1 第一部分大致讲解了就是一个螺旋的情况, 我用手绘图描述一下,基本就懂了 其实转换为一个"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>Noahlias</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>Home</li></a><a href=/post/><li class=mobile-menu-item>Archives</li></a><a href=/tags/><li class=mobile-menu-item>Tags</li></a><a href=/categories/><li class=mobile-menu-item>Categories</li></a><a href=/about/><li class=mobile-menu-item>About</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>Noahlias</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>Home</a></li><li class=menu-item><a class=menu-item-link href=/post/>Archives</a></li><li class=menu-item><a class=menu-item-link href=/tags/>Tags</a></li><li class=menu-item><a class=menu-item-link href=/categories/>Categories</a></li><li class=menu-item><a class=menu-item-link href=/about/>About</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>Day 3:Spiral Memory</h1><div class=post-meta><span class=post-time>2023-07-31</span><div class=post-category><a href=/categories/advent-of-code/>Advent of Code</a>
+<a href=/categories/haskell/>Haskell</a></div></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>Contents</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#part-1>Part 1</a></li><li><a href=#part-2>Part 2</a></li><li><a href=#summary>Summary</a></li></ul></li></ul></nav></div></div><div class=post-content><p><a href=https://adventofcode.com/2017/day/3>Day3</a></p><p>螺旋记忆，这个标题就很有意思，实际它的实现也很有意思</p><h2 id=part-1>Part 1</h2><p>第一部分大致讲解了就是一个螺旋的情况, 我用手绘图描述一下,基本就懂了
+其实转换为一个流程理解起来也很简单</p><p><img src=https://i.imgur.com/tYQ4jD3.png alt=spiral></p><p>不过参考了这个<a href=https://stackoverflow.com/questions/57569623/coordinates-for-clockwise-outwards-spiral>链接</a></p><p>具体实现:</p><ul><li>第一步定义上下左右</li><li>第二部确认是顺时针螺旋还是逆时针螺旋这个题目左和下是走2次</li><li>生成无限螺旋循环序列之后 从原点移动修改每一个点的坐标值</li><li>计算对应的曼哈顿距离即可得到结果等</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-haskell data-lang=haskell><span class=line><span class=cl><span class=kr>data</span> <span class=kt>Dir</span> <span class=ow>=</span> <span class=kt>R</span> <span class=o>|</span> <span class=kt>D</span> <span class=o>|</span> <span class=kt>L</span> <span class=o>|</span> <span class=kt>U</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nf>spiralSeq</span> <span class=ow>::</span> <span class=kt>Int</span> <span class=ow>-&gt;</span> <span class=p>[</span><span class=kt>Dir</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nf>spiralSeq</span> <span class=n>n</span> <span class=ow>=</span> <span class=n>rn</span> <span class=kt>R</span> <span class=o>++</span> <span class=n>rn</span> <span class=kt>U</span> <span class=o>++</span> <span class=n>rn1</span> <span class=kt>L</span> <span class=o>++</span> <span class=n>rn1</span> <span class=kt>D</span>
+</span></span><span class=line><span class=cl>  <span class=kr>where</span>
+</span></span><span class=line><span class=cl>    <span class=n>rn</span> <span class=ow>=</span> <span class=n>replicate</span> <span class=n>n</span>
+</span></span><span class=line><span class=cl>    <span class=n>rn1</span> <span class=ow>=</span> <span class=n>replicate</span> <span class=p>(</span><span class=n>n</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nf>spiral</span> <span class=ow>::</span> <span class=p>[</span><span class=kt>Dir</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nf>spiral</span> <span class=ow>=</span> <span class=n>concatMap</span> <span class=n>spiralSeq</span> <span class=p>[</span><span class=mi>1</span><span class=p>,</span> <span class=mi>3</span> <span class=o>..</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nf>move</span> <span class=ow>::</span> <span class=p>(</span><span class=kt>Int</span><span class=p>,</span> <span class=kt>Int</span><span class=p>)</span> <span class=ow>-&gt;</span> <span class=kt>Dir</span> <span class=ow>-&gt;</span> <span class=p>(</span><span class=kt>Int</span><span class=p>,</span> <span class=kt>Int</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nf>move</span> <span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>)</span> <span class=ow>=</span> <span class=n>go</span>
+</span></span><span class=line><span class=cl>  <span class=kr>where</span>
+</span></span><span class=line><span class=cl>    <span class=n>go</span> <span class=kt>R</span> <span class=ow>=</span> <span class=p>(</span><span class=n>x</span> <span class=o>+</span> <span class=mi>1</span><span class=p>,</span> <span class=n>y</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>go</span> <span class=kt>D</span> <span class=ow>=</span> <span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span> <span class=o>-</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>go</span> <span class=kt>L</span> <span class=ow>=</span> <span class=p>(</span><span class=n>x</span> <span class=o>-</span> <span class=mi>1</span><span class=p>,</span> <span class=n>y</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>go</span> <span class=kt>U</span> <span class=ow>=</span> <span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span> <span class=o>+</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nf>spiralPos</span> <span class=ow>::</span> <span class=p>[(</span><span class=kt>Int</span><span class=p>,</span> <span class=kt>Int</span><span class=p>)]</span>
+</span></span><span class=line><span class=cl><span class=nf>spiralPos</span> <span class=ow>=</span> <span class=n>scanl</span> <span class=n>move</span> <span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>)</span> <span class=n>spiral</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=part-2>Part 2</h2><p>第二部分就是在第一部分上做了更多的工作,比如
+它判断1个点的周围8个点是不是邻居 因此用于累加，其次用了<strong>HashMAP</strong>结构来记录每一个节点的累加值，其次读取这个无限递归螺旋哈希字典映射，从而判断找到比输入第一个大的值</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-haskell data-lang=haskell><span class=line><span class=cl><span class=kr>type</span> <span class=kt>Coordinate</span> <span class=ow>=</span> <span class=p>(</span><span class=kt>Int</span><span class=p>,</span> <span class=kt>Int</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>type</span> <span class=kt>Spiral</span> <span class=ow>=</span> <span class=kt>Map</span><span class=o>.</span><span class=kt>Map</span> <span class=kt>Coordinate</span> <span class=kt>Int</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>-- 创建一个用于获取坐标的所有邻居的函数</span>
+</span></span><span class=line><span class=cl><span class=nf>neighbors</span> <span class=ow>::</span> <span class=kt>Coordinate</span> <span class=ow>-&gt;</span> <span class=p>[</span><span class=kt>Coordinate</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nf>neighbors</span> <span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>y</span><span class=p>)</span> <span class=ow>=</span> <span class=p>[(</span><span class=n>x</span> <span class=o>+</span> <span class=n>dx</span><span class=p>,</span> <span class=n>y</span> <span class=o>+</span> <span class=n>dy</span><span class=p>)</span> <span class=o>|</span> <span class=n>dx</span> <span class=ow>&lt;-</span> <span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>],</span> <span class=n>dy</span> <span class=ow>&lt;-</span> <span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>1</span><span class=p>],</span> <span class=n>dx</span> <span class=o>/=</span> <span class=mi>0</span> <span class=o>||</span> <span class=n>dy</span> <span class=o>/=</span> <span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>-- 创建一个用于从螺旋中获取特定坐标的值的函数</span>
+</span></span><span class=line><span class=cl><span class=nf>getValue</span> <span class=ow>::</span> <span class=kt>Spiral</span> <span class=ow>-&gt;</span> <span class=kt>Coordinate</span> <span class=ow>-&gt;</span> <span class=kt>Int</span>
+</span></span><span class=line><span class=cl><span class=nf>getValue</span> <span class=n>spiral</span> <span class=n>coord</span>
+</span></span><span class=line><span class=cl>  <span class=o>|</span> <span class=n>coord</span> <span class=o>==</span> <span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>)</span> <span class=ow>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>  <span class=o>|</span> <span class=n>otherwise</span> <span class=ow>=</span> <span class=n>sum</span> <span class=o>$</span> <span class=n>map</span> <span class=p>(</span><span class=nf>\</span><span class=n>c</span> <span class=ow>-&gt;</span> <span class=kt>Map</span><span class=o>.</span><span class=n>findWithDefault</span> <span class=mi>0</span> <span class=n>c</span> <span class=n>spiral</span><span class=p>)</span> <span class=o>$</span> <span class=n>neighbors</span> <span class=n>coord</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>-- 递归生成螺旋值序列</span>
+</span></span><span class=line><span class=cl><span class=nf>spiralVals</span> <span class=ow>::</span> <span class=p>[</span><span class=kt>Coordinate</span><span class=p>]</span> <span class=ow>-&gt;</span> <span class=kt>Spiral</span> <span class=ow>-&gt;</span> <span class=p>[(</span><span class=kt>Coordinate</span><span class=p>,</span> <span class=kt>Int</span><span class=p>)]</span>
+</span></span><span class=line><span class=cl><span class=nf>spiralVals</span> <span class=p>(</span><span class=n>pos</span> <span class=kt>:</span> <span class=n>positions</span><span class=p>)</span> <span class=n>spiral</span> <span class=ow>=</span> <span class=p>(</span><span class=n>pos</span><span class=p>,</span> <span class=n>value</span><span class=p>)</span> <span class=kt>:</span> <span class=n>spiralVals</span> <span class=n>positions</span> <span class=n>updatedSpiral</span>
+</span></span><span class=line><span class=cl>  <span class=kr>where</span>
+</span></span><span class=line><span class=cl>    <span class=n>value</span> <span class=ow>=</span> <span class=n>getValue</span> <span class=n>spiral</span> <span class=n>pos</span>
+</span></span><span class=line><span class=cl>    <span class=n>updatedSpiral</span> <span class=ow>=</span> <span class=kt>Map</span><span class=o>.</span><span class=n>insert</span> <span class=n>pos</span> <span class=n>value</span> <span class=n>spiral</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>-- 修改part2以在新的Spiral结构中存储值</span>
+</span></span><span class=line><span class=cl><span class=nf>part2</span> <span class=n>xs</span> <span class=ow>=</span> <span class=n>solve</span> <span class=p>(</span><span class=n>read</span> <span class=n>xs</span> <span class=ow>::</span> <span class=kt>Int</span><span class=p>)</span> <span class=n>spirals</span>
+</span></span><span class=line><span class=cl>  <span class=kr>where</span>
+</span></span><span class=line><span class=cl>    <span class=n>spirals</span> <span class=ow>=</span> <span class=n>spiralVals</span> <span class=n>spiralPos</span> <span class=p>(</span><span class=kt>Map</span><span class=o>.</span><span class=n>singleton</span> <span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>)</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>solve</span> <span class=n>target</span> <span class=n>spirals</span> <span class=ow>=</span> <span class=n>snd</span> <span class=o>.</span> <span class=n>head</span> <span class=o>$</span> <span class=n>dropWhile</span> <span class=p>((</span><span class=o>&lt;=</span> <span class=n>target</span><span class=p>)</span> <span class=o>.</span> <span class=n>snd</span><span class=p>)</span> <span class=n>spirals</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=summary>Summary</h2><p>第一部分是参考<strong>stackoverflow</strong>来做的，第二部分是我提供的思路，但是具体实现借用了<code>GPT4</code> 来辅助我，具体不太懂Haskell里的一些hashmap如何实现和应用等以及有的地方需要利用惰性赋值来避免执行错误得不到正确的结果等</p></div><footer class=post-footer><div class=post-tags><a href=/tags/advent/>Advent</a></div><nav class=post-nav><a class=prev href=/post/multiprocess_and_multithread/><i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">Multi-threading and Multi-process</span>
+<span class="prev-text nav-mobile">Prev</span></a>
+<a class=next href=/post/haskell_practice_day_2/><span class="next-text nav-default">Day 2: Corruption Checksum</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><script src=https://utteranc.es/client.js repo=noahlias/noahlias.github.io issue-term=pathname theme=github-light crossorigin=anonymous async></script><noscript>Please enable JavaScript to view the <a href=https://github.com/utterance>comments powered by utterances.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=https://www.github.com/noahlias class="iconfont icon-github" title=github></a>
+<a href=https://weibo.com/Alias21 class="iconfont icon-weibo" title=weibo></a>
+<a href=https://space.bilibili.com/1741799 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://noahlias.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a></span>
+<span class=division>|</span>
+<span class=theme-info>Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span>
+<span class=copyright-year>&copy;
+2022 -
+2024<span class=heart><i class="iconfont icon-heart"></i></span><span>Noahlias</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script>
+<script type=text/javascript>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script><script async src=https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin=anonymous></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-85629761-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>

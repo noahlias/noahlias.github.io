@@ -1,0 +1,333 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>Multi-threading and Multi-process - Noahlias's Blog</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="Noahlias"><meta name=description content="问题 这个东西的探讨要从前天在b 站看到一个有趣的问题开始, 它启发了我对多进程与多线程的思考. 这个问题是: 有 2 个线程, 一个线程打印一个A, 一个线"><meta name=keywords content="Coding,Blog,Life"><meta name=generator content="Hugo 0.110.0 with theme even"><link rel=canonical href=https://noahlias.github.io/post/multiprocess_and_multithread/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet><meta property="og:title" content="Multi-threading and Multi-process"><meta property="og:description" content="问题 这个东西的探讨要从前天在b 站看到一个有趣的问题开始, 它启发了我对多进程与多线程的思考. 这个问题是: 有 2 个线程, 一个线程打印一个A, 一个线"><meta property="og:type" content="article"><meta property="og:url" content="https://noahlias.github.io/post/multiprocess_and_multithread/"><meta property="article:section" content="post"><meta property="article:published_time" content="2024-04-17T19:00:43+08:00"><meta property="article:modified_time" content="2024-04-17T19:00:43+08:00"><meta itemprop=name content="Multi-threading and Multi-process"><meta itemprop=description content="问题 这个东西的探讨要从前天在b 站看到一个有趣的问题开始, 它启发了我对多进程与多线程的思考. 这个问题是: 有 2 个线程, 一个线程打印一个A, 一个线"><meta itemprop=datePublished content="2024-04-17T19:00:43+08:00"><meta itemprop=dateModified content="2024-04-17T19:00:43+08:00"><meta itemprop=wordCount content="1147"><meta itemprop=keywords content="CS,"><meta name=twitter:card content="summary"><meta name=twitter:title content="Multi-threading and Multi-process"><meta name=twitter:description content="问题 这个东西的探讨要从前天在b 站看到一个有趣的问题开始, 它启发了我对多进程与多线程的思考. 这个问题是: 有 2 个线程, 一个线程打印一个A, 一个线"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>Noahlias</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>Home</li></a><a href=/post/><li class=mobile-menu-item>Archives</li></a><a href=/tags/><li class=mobile-menu-item>Tags</li></a><a href=/categories/><li class=mobile-menu-item>Categories</li></a><a href=/about/><li class=mobile-menu-item>About</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>Noahlias</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>Home</a></li><li class=menu-item><a class=menu-item-link href=/post/>Archives</a></li><li class=menu-item><a class=menu-item-link href=/tags/>Tags</a></li><li class=menu-item><a class=menu-item-link href=/categories/>Categories</a></li><li class=menu-item><a class=menu-item-link href=/about/>About</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>Multi-threading and Multi-process</h1><div class=post-meta><span class=post-time>2024-04-17</span><div class=post-category><a href=/categories/thinking/>Thinking</a></div></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>Contents</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><a href=#问题>问题</a><ul><li><a href=#线程>线程</a><ul><li><a href=#c>C</a></li><li><a href=#python>Python</a></li><li><a href=#golang>Golang</a></li></ul></li><li><a href=#进程>进程</a><ul><li><a href=#fork-bomb>Fork Bomb</a></li></ul></li><li><a href=#总结>总结</a></li></ul></li></ul></nav></div></div><div class=post-content><h1 id=问题>问题</h1><p>这个东西的探讨要从前天在<a href=https://www.bilibili.com/video/BV1ez421C7Fz>b 站</a>看到一个有趣的问题开始,
+它启发了我对多进程与多线程的思考.</p><blockquote><p>这个问题是: 有 2 个线程, 一个线程打印一个<em>A</em>, 一个线程打印<em>B</em>, 问如何让这两个线程交替打印 100 次?</p></blockquote><h2 id=线程>线程</h2><p>线程是操作系统能够进行运算调度的最小单位. 它被包含在进程之中, 是进程中的实际运作单位.
+我第一时间看到了,用 condition 来处理线程的切换以及同步问题</p><h3 id=c>C</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;pthread.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#define NUM_ITERATIONS 100
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=kt>pthread_mutex_t</span> <span class=n>mutex</span> <span class=o>=</span> <span class=n>PTHREAD_MUTEX_INITIALIZER</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kt>pthread_cond_t</span> <span class=n>cond</span> <span class=o>=</span> <span class=n>PTHREAD_COND_INITIALIZER</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=n>print_a</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=o>*</span><span class=nf>print_a_thread</span><span class=p>(</span><span class=kt>void</span> <span class=o>*</span><span class=n>arg</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>NUM_ITERATIONS</span><span class=p>;</span> <span class=o>++</span><span class=n>i</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>pthread_mutex_lock</span><span class=p>(</span><span class=o>&amp;</span><span class=n>mutex</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=p>(</span><span class=o>!</span><span class=n>print_a</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nf>pthread_cond_wait</span><span class=p>(</span><span class=o>&amp;</span><span class=n>cond</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>mutex</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;A</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>print_a</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=nf>pthread_cond_signal</span><span class=p>(</span><span class=o>&amp;</span><span class=n>cond</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>pthread_mutex_unlock</span><span class=p>(</span><span class=o>&amp;</span><span class=n>mutex</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nb>NULL</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=o>*</span><span class=nf>print_b_thread</span><span class=p>(</span><span class=kt>void</span> <span class=o>*</span><span class=n>arg</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>NUM_ITERATIONS</span><span class=p>;</span> <span class=o>++</span><span class=n>i</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>pthread_mutex_lock</span><span class=p>(</span><span class=o>&amp;</span><span class=n>mutex</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=p>(</span><span class=n>print_a</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nf>pthread_cond_wait</span><span class=p>(</span><span class=o>&amp;</span><span class=n>cond</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>mutex</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;B</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=n>print_a</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=nf>pthread_cond_signal</span><span class=p>(</span><span class=o>&amp;</span><span class=n>cond</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>pthread_mutex_unlock</span><span class=p>(</span><span class=o>&amp;</span><span class=n>mutex</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nb>NULL</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>pthread_t</span> <span class=n>thread_a</span><span class=p>,</span> <span class=n>thread_b</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Create the threads
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nf>pthread_create</span><span class=p>(</span><span class=o>&amp;</span><span class=n>thread_a</span><span class=p>,</span> <span class=nb>NULL</span><span class=p>,</span> <span class=n>print_a_thread</span><span class=p>,</span> <span class=nb>NULL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>pthread_create</span><span class=p>(</span><span class=o>&amp;</span><span class=n>thread_b</span><span class=p>,</span> <span class=nb>NULL</span><span class=p>,</span> <span class=n>print_b_thread</span><span class=p>,</span> <span class=nb>NULL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Wait for the threads to finish
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nf>pthread_join</span><span class=p>(</span><span class=n>thread_a</span><span class=p>,</span> <span class=nb>NULL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>pthread_join</span><span class=p>(</span><span class=n>thread_b</span><span class=p>,</span> <span class=nb>NULL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=c1>// Clean up
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=nf>pthread_mutex_destroy</span><span class=p>(</span><span class=o>&amp;</span><span class=n>mutex</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>pthread_cond_destroy</span><span class=p>(</span><span class=o>&amp;</span><span class=n>cond</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=python>Python</h3><p>我就在思考, 这个问题如果用<em>python</em>来解决, 会是怎样的呢?</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>threading</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>NUM_ITERATIONS</span> <span class=o>=</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Create a lock and an event</span>
+</span></span><span class=line><span class=cl><span class=n>event_a</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Event</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>event_a</span><span class=o>.</span><span class=n>set</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=c1># Set the event to True, so that the first thread can start printing &#39;A&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>event_b</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Event</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>print_a_thread</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>NUM_ITERATIONS</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=c1># Wait for the event to be set (which means it&#39;s &#39;A&#39;s turn)</span>
+</span></span><span class=line><span class=cl>            <span class=n>event_a</span><span class=o>.</span><span class=n>wait</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;A&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=c1># Clear the event to signal that it&#39;s not &#39;A&#39;s turn anymore</span>
+</span></span><span class=line><span class=cl>            <span class=n>event_a</span><span class=o>.</span><span class=n>clear</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=c1># Set the event for &#39;B&#39; to start printing</span>
+</span></span><span class=line><span class=cl>            <span class=n>event_b</span><span class=o>.</span><span class=n>set</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>print_b_thread</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>_</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=n>NUM_ITERATIONS</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=c1># Wait for the event to be cleared (which means it&#39;s &#39;B&#39;s turn)</span>
+</span></span><span class=line><span class=cl>            <span class=n>event_b</span><span class=o>.</span><span class=n>wait</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;B&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=c1># Set the event to signal that it&#39;s not &#39;B&#39;s turn anymore</span>
+</span></span><span class=line><span class=cl>            <span class=n>event_b</span><span class=o>.</span><span class=n>clear</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=c1># Set the event for &#39;A&#39; to start printing</span>
+</span></span><span class=line><span class=cl>            <span class=n>event_a</span><span class=o>.</span><span class=n>set</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Create the threads</span>
+</span></span><span class=line><span class=cl><span class=n>thread_a</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>print_a_thread</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>thread_b</span> <span class=o>=</span> <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>(</span><span class=n>target</span><span class=o>=</span><span class=n>print_b_thread</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Start the threads</span>
+</span></span><span class=line><span class=cl><span class=n>thread_a</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>thread_b</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Wait for the threads to finish</span>
+</span></span><span class=line><span class=cl><span class=n>thread_a</span><span class=o>.</span><span class=n>join</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=n>thread_b</span><span class=o>.</span><span class=n>join</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=golang>Golang</h3><p>因为好奇,对协程友好的<strong>golang</strong>会怎么解决这个问题呢?</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>package</span> <span class=nx>main</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;fmt&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=s>&#34;sync&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>const</span> <span class=nx>NUM_ITERATIONS</span> <span class=p>=</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>printA</span><span class=p>(</span><span class=nx>wg</span> <span class=o>*</span><span class=nx>sync</span><span class=p>.</span><span class=nx>WaitGroup</span><span class=p>,</span> <span class=nx>chA</span><span class=p>,</span> <span class=nx>chB</span> <span class=kd>chan</span> <span class=kd>struct</span><span class=p>{})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=nx>wg</span><span class=p>.</span><span class=nf>Done</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>NUM_ITERATIONS</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=o>&lt;-</span><span class=nx>chA</span>
+</span></span><span class=line><span class=cl>		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;A&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=nx>chB</span> <span class=o>&lt;-</span><span class=kd>struct</span><span class=p>{}{}</span> <span class=c1>// Wait for the other goroutine to print &#39;B&#39;
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>printB</span><span class=p>(</span><span class=nx>wg</span> <span class=o>*</span><span class=nx>sync</span><span class=p>.</span><span class=nx>WaitGroup</span><span class=p>,</span> <span class=nx>chA</span><span class=p>,</span><span class=nx>chB</span> <span class=kd>chan</span> <span class=kd>struct</span><span class=p>{})</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=nx>wg</span><span class=p>.</span><span class=nf>Done</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>NUM_ITERATIONS</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=o>&lt;-</span><span class=nx>chB</span> <span class=c1>// Wait for the other goroutine to print &#39;A&#39;
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;B&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>NUM_ITERATIONS</span><span class=o>-</span><span class=mi>1</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>chA</span><span class=o>&lt;-</span><span class=kd>struct</span><span class=p>{}{}</span> <span class=c1>// Signal the other goroutine to print &#39;A&#39;
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>wg</span> <span class=nx>sync</span><span class=p>.</span><span class=nx>WaitGroup</span>
+</span></span><span class=line><span class=cl>	<span class=nx>chA</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kd>struct</span><span class=p>{},</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>chB</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kd>struct</span><span class=p>{})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>wg</span><span class=p>.</span><span class=nf>Add</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>go</span> <span class=nf>printA</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>wg</span><span class=p>,</span> <span class=nx>chA</span><span class=p>,</span> <span class=nx>chB</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>go</span> <span class=nf>printB</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>wg</span><span class=p>,</span> <span class=nx>chA</span><span class=p>,</span> <span class=nx>chB</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>chA</span> <span class=o>&lt;-</span> <span class=kd>struct</span><span class=p>{}{}</span> <span class=c1>// Start the first goroutine
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>	<span class=nx>wg</span><span class=p>.</span><span class=nf>Wait</span><span class=p>()</span> <span class=c1>// Wait for both goroutines to finish
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nb>close</span><span class=p>(</span><span class=nx>chA</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nb>close</span><span class=p>(</span><span class=nx>chB</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>Golang 是真的很简洁了, 用 channel 来解决这个问题,太简洁了</p><h2 id=进程>进程</h2><p>进程是操作系统资源分配的最小单位, 它是程序的一次执行过程, 是一个动态的概念, 是程序在一个数据集合上的一次运行活动.
+我最近看<a href=https://jyywiki.cn/OS/2024/lect14.md>jyy</a>的操作系统课程,我又重新理解了<code>fork</code>/<code>execve</code>/<code>_wait</code> 等系统调用, 以及进程间通信的方式.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;stdio.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;unistd.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>(){</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>for</span> <span class=p>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=mi>3</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>){</span>
+</span></span><span class=line><span class=cl>    <span class=nf>fork</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;Hello&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>//fflush(stdout);
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>如何理解这个进程会打印<strong>14</strong>个<em>Hello</em>呢?</p><p>$ 2 + 4+ 8 = 14 $</p><p>fork 是一个二叉树的过程, 一个进程 fork 出来的子进程, 会继续 fork 出来一个子进程, 以此类推, 所以会有 14 个<em>Hello</em>.
+记住它是一个状态机的复制</p><h3 id=fork-bomb>Fork Bomb</h3><p>你知道什么是 fork 炸弹吗? 一个简单的 shell 脚本就可以让你的系统崩溃</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>:<span class=o>(){</span> :<span class=p>|</span>:<span class=p>&amp;</span> <span class=o>}</span><span class=p>;</span>:
+</span></span></code></pre></td></tr></table></div></div><p>上面的命令等同于</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>bomb<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  bomb <span class=p>|</span> bomb <span class=p>&amp;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=总结>总结</h2><p>如果我想知道更多,我觉得我未来需要去了解硬件实现,需要知道每一个原子操作是怎么实现的,这样我才能更好的理解操作系统,编程语言,编译器等等.</p></div><footer class=post-footer><div class=post-tags><a href=/tags/cs/>CS</a></div><nav class=post-nav><a class=next href=/post/haskell_practice_day_3/><span class="next-text nav-default">Day 3:Spiral Memory</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><script src=https://utteranc.es/client.js repo=noahlias/noahlias.github.io issue-term=pathname theme=github-light crossorigin=anonymous async></script><noscript>Please enable JavaScript to view the <a href=https://github.com/utterance>comments powered by utterances.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=https://www.github.com/noahlias class="iconfont icon-github" title=github></a>
+<a href=https://weibo.com/Alias21 class="iconfont icon-weibo" title=weibo></a>
+<a href=https://space.bilibili.com/1741799 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://noahlias.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a></span>
+<span class=division>|</span>
+<span class=theme-info>Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span>
+<span class=copyright-year>&copy;
+2022 -
+2024<span class=heart><i class="iconfont icon-heart"></i></span><span>Noahlias</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script>
+<script type=text/javascript>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script><script async src=https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin=anonymous></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-85629761-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>
