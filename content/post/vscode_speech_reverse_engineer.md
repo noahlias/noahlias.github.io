@@ -1,6 +1,8 @@
 ---
-title: "vscode_speech_reverse_engineering"
+title: "Vscode_speech_reverse_engineering"
 date: 2024-04-23T18:35:38+08:00
+tags: ["Reverse Engineering"]
+categories: ["Fun"]
 draft: false
 ---
 
@@ -175,15 +177,17 @@ bun run index.ts
 ## Summary
 
 这次玩了一下vscode的语音识别插件, 通过逆向工程还原了一下它的代码,但其实它的[`RTF`](https://openvoice-tech.net/index.php/Real-time-factor)还是很好的,
-缺点就是语音识别效果感觉不好, 没有达摩院的[FunASR](https://github.com/alibaba-damo-academy/FunASR)模型效果好,也主要是我测试的是中文
+缺点就是语音识别效果感觉不好, 没有达摩院的[FunASR](https://github.com/alibaba-damo-academy/FunASR)模型效果好,也主要是我测试的是中文,
 达摩院的缺陷就是安装依赖很大至少3G,微软的这个很轻量,140M左右.
-我看官方的SDK里面有提到`TTS`,未来也有可能有本地嵌入式的`TTS`模型,这个也是一个很好的方向
+我看官方的SDK里面有提到`TTS`,未来也有可能有本地嵌入式的`TTS`模型,这个也是一个很好的方向,
 不过这个STT暂时之支持C++/C#/Java的SDK,它是用[onnxruntime](https://github.com/microsoft/onnxruntime)来进行推理的
 
 ## Extra
 
 我们来看这个中文的语音模型里面有个很有意思的东西
+
 ![](/assets/profanity.png)
+
 其实这个就是它的过滤词词表,但是我不知道如何解密它
 还有一个很有意思的东西,有个`keyword/heycode.table`文件, 这个是服务于嵌入式语音识别的keyword recognition
 
