@@ -12,15 +12,13 @@ draft: false
 
 简单介绍一下起源哈,我最近在b站看到一个很有意思的[STT](https://en.wikipedia.org/wiki/Speech_recognition)工具
 它可以将[视频](https://www.bilibili.com/video/BV19m411o7Dk/)中的语音转换成文字,然后在视频中显示出来,关键效果很好
-我就想到了它的原理,应该是[Github Copilot Chat]()的语音识别功能
+我就想到了它的原理,应该是[Github Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat)的语音识别功能
 之后我就找了它的插件[VsCode Speech](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-speech)
 
 ### Embeded Speech Recognition
 
 这是一个本地的嵌入式语音识别用到**MircoSoft**的**Speech SDK**
-
 - [node-speech](https://github.com/microsoft/node-speech)
-
 
 ```javascript
 import * as speech from "@vscode/node-speech";
@@ -48,13 +46,13 @@ transcriber.dispose();
 基础目录是一个vscode 插件, 之后会包含其他语言的语言包
 ![](assets/vscode_speech_tree.png)
 核心就是这个`dist\main.js` 里面包含了所有的逻辑代码
-代码经过最小化和混淆, 但是还是可以通过一些手段还原出来
-大致就是用了一段加密获取model key, 然后调用了`node-speech`的接口
+代码经过最小化和混淆, 但是还是可以通过一些手段还原出来,
+大致就是用了一段加密获取model key, 然后调用了`node-speech`的接口,
 可以看下这段代码
-
-![](/assets/main.js)
+![](/assets/main.js.png)
 
 ## POC
+
 ### Model key Get
 
 ```typescript
@@ -160,12 +158,10 @@ export function wrapperTranscriberCallback(session_id: string, callback: ITransc
  }, 300);
 
 ```
-
 ### Config
 
 你需要将动态链接库放到对应的包目录下本地才会运行
 ![](/assets/lib.png)
-
 当然你也可以根据这个库的环境来自己编译打包,参考这个[gyp文件](https://github.com/microsoft/node-speech/blob/main/binding.gyp)
 
 ### Usage
@@ -187,12 +183,9 @@ bun run index.ts
 ## Extra
 
 我们来看这个中文的语音模型里面有个很有意思的东西
-
 ![](/assets/profanity.png)
-
 其实这个就是它的过滤词词表,但是我不知道如何解密它
 还有一个很有意思的东西,有个`keyword/heycode.table`文件, 这个是服务于嵌入式语音识别的keyword recognition
-
 
 ## Reference
 
@@ -200,5 +193,3 @@ bun run index.ts
 - [node-speech](https://github.com/microsoft/node-speech)
 - [embedded-speech-recognition](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/embedded-speech)
 - [vscode-speech](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-speech)
-
-
