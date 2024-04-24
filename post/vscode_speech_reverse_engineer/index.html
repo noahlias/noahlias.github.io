@@ -1,0 +1,251 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>vscode_speech_reverse_engineering - Noahlias's Blog</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="Noahlias"><meta name=description content="Reverse Engineering of VSCode Speech Introduction 简单介绍一下起源哈,我最近在b站看到一个很有意思的STT工具 它可以将视频中的语音转换成文字,然后在视频中显示出来,关键效果很好 我"><meta name=keywords content="Coding,Blog,Life"><meta name=generator content="Hugo 0.110.0 with theme even"><link rel=canonical href=https://noahlias.github.io/post/vscode_speech_reverse_engineer/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet><meta property="og:title" content="vscode_speech_reverse_engineering"><meta property="og:description" content="Reverse Engineering of VSCode Speech Introduction 简单介绍一下起源哈,我最近在b站看到一个很有意思的STT工具 它可以将视频中的语音转换成文字,然后在视频中显示出来,关键效果很好 我"><meta property="og:type" content="article"><meta property="og:url" content="https://noahlias.github.io/post/vscode_speech_reverse_engineer/"><meta property="article:section" content="post"><meta property="article:published_time" content="2024-04-23T18:35:38+08:00"><meta property="article:modified_time" content="2024-04-23T18:35:38+08:00"><meta itemprop=name content="vscode_speech_reverse_engineering"><meta itemprop=description content="Reverse Engineering of VSCode Speech Introduction 简单介绍一下起源哈,我最近在b站看到一个很有意思的STT工具 它可以将视频中的语音转换成文字,然后在视频中显示出来,关键效果很好 我"><meta itemprop=datePublished content="2024-04-23T18:35:38+08:00"><meta itemprop=dateModified content="2024-04-23T18:35:38+08:00"><meta itemprop=wordCount content="1260"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="vscode_speech_reverse_engineering"><meta name=twitter:description content="Reverse Engineering of VSCode Speech Introduction 简单介绍一下起源哈,我最近在b站看到一个很有意思的STT工具 它可以将视频中的语音转换成文字,然后在视频中显示出来,关键效果很好 我"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>Noahlias</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>Home</li></a><a href=/post/><li class=mobile-menu-item>Archives</li></a><a href=/tags/><li class=mobile-menu-item>Tags</li></a><a href=/categories/><li class=mobile-menu-item>Categories</li></a><a href=/about/><li class=mobile-menu-item>About</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>Noahlias</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>Home</a></li><li class=menu-item><a class=menu-item-link href=/post/>Archives</a></li><li class=menu-item><a class=menu-item-link href=/tags/>Tags</a></li><li class=menu-item><a class=menu-item-link href=/categories/>Categories</a></li><li class=menu-item><a class=menu-item-link href=/about/>About</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>vscode_speech_reverse_engineering</h1><div class=post-meta><span class=post-time>2024-04-23</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>Contents</h2><div class=post-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#reverse-engineering-of-vscode-speech>Reverse Engineering of VSCode Speech</a><ul><li><a href=#introduction>Introduction</a></li><li><a href=#embeded-speech-recognition>Embeded Speech Recognition</a></li><li><a href=#extension-source>Extension Source</a></li></ul></li><li><a href=#poc>POC</a><ul><li><a href=#model-key-get>Model key Get</a></li><li><a href=#speech-recognition>Speech Recognition</a></li><li><a href=#config>Config</a></li><li><a href=#usage>Usage</a></li></ul></li><li><a href=#summary>Summary</a></li><li><a href=#extra>Extra</a></li><li><a href=#reference>Reference</a></li></ul></li></ul></nav></div></div><div class=post-content><h2 id=reverse-engineering-of-vscode-speech>Reverse Engineering of VSCode Speech</h2><p><img src=/assets/vscode_speech.png alt></p><h3 id=introduction>Introduction</h3><p>简单介绍一下起源哈,我最近在b站看到一个很有意思的<a href=https://en.wikipedia.org/wiki/Speech_recognition>STT</a>工具
+它可以将<a href=https://www.bilibili.com/video/BV19m411o7Dk/>视频</a>中的语音转换成文字,然后在视频中显示出来,关键效果很好
+我就想到了它的原理,应该是<a href>Github Copilot Chat</a>的语音识别功能
+之后我就找了它的插件<a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-speech">VsCode Speech</a></p><h3 id=embeded-speech-recognition>Embeded Speech Recognition</h3><p>这是一个本地的嵌入式语音识别用到<strong>MircoSoft</strong>的<strong>Speech SDK</strong></p><ul><li><a href=https://github.com/microsoft/node-speech>node-speech</a></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=kr>import</span> <span class=o>*</span> <span class=nx>as</span> <span class=nx>speech</span> <span class=nx>from</span> <span class=s2>&#34;@vscode/node-speech&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>modelName</span> <span class=o>=</span> <span class=s2>&#34;&lt;name of the speech model&gt;&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>modelPath</span> <span class=o>=</span> <span class=s2>&#34;&lt;path to the speech model&gt;&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>modelKey</span> <span class=o>=</span> <span class=s2>&#34;&lt;key for the speech model&gt;&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Live transcription from microphone
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>let</span> <span class=nx>transcriber</span> <span class=o>=</span> <span class=nx>speech</span><span class=p>.</span><span class=nx>createTranscriber</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span> <span class=nx>modelName</span><span class=p>,</span> <span class=nx>modelPath</span><span class=p>,</span> <span class=nx>modelKey</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=nx>err</span><span class=p>,</span> <span class=nx>res</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nx>err</span><span class=p>,</span> <span class=nx>res</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=c1>// you can stop/start later
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>transcriber</span><span class=p>.</span><span class=nx>stop</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=nx>transcriber</span><span class=p>.</span><span class=nx>start</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=c1>// later when done...
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>transcriber</span><span class=p>.</span><span class=nx>dispose</span><span class=p>();</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=extension-source>Extension Source</h3><p><img src=/assets/extension_directory.png alt></p><p>基础目录是一个vscode 插件, 之后会包含其他语言的语言包
+<img src=assets/vscode_speech_tree.png alt>
+核心就是这个<code>dist\main.js</code> 里面包含了所有的逻辑代码
+代码经过最小化和混淆, 但是还是可以通过一些手段还原出来
+大致就是用了一段加密获取model key, 然后调用了<code>node-speech</code>的接口
+可以看下这段代码</p><p><img src=/assets/main.js alt></p><h2 id=poc>POC</h2><h3 id=model-key-get>Model key Get</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=c1>//Generated by GPT-4-turbo
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>function</span> <span class=nx>decrypt</span><span class=p>(</span><span class=nx>n</span><span class=p>,</span> <span class=nx>e</span><span class=p>,</span> <span class=nx>c</span><span class=p>,</span> <span class=nx>d</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// n, e, c, and d are buffers
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// create a sha256 hash
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>let</span> <span class=nx>hash</span> <span class=o>=</span> <span class=nx>crypto</span><span class=p>.</span><span class=nx>createHash</span><span class=p>(</span><span class=s1>&#39;sha256&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// update the hash with the data in n
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>hash</span><span class=p>.</span><span class=nx>update</span><span class=p>(</span><span class=nx>n</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// digest the hash (i.e., finalize it and prevent further data from being added),
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// producing a resultant buffer
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>let</span> <span class=nx>key</span> <span class=o>=</span> <span class=nx>hash</span><span class=p>.</span><span class=nx>digest</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// create a decipher object, specifying aes256 with a gcm mode of operation,
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// use the key derived above and the provided IV
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>let</span> <span class=nx>decipher</span> <span class=o>=</span> <span class=nx>crypto</span><span class=p>.</span><span class=nx>createDecipheriv</span><span class=p>(</span><span class=s1>&#39;aes-256-gcm&#39;</span><span class=p>,</span> <span class=nx>key</span><span class=p>,</span> <span class=nx>c</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// set the authentication tag to the provided one
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>decipher</span><span class=p>.</span><span class=nx>setAuthTag</span><span class=p>(</span><span class=nx>e</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// decrypt the provided encrypted data and finalize the decipher,
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// converting the result to a string
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// let decryptedText = Buffer.concat([decipher.update(d),decipher.final()]).toString();
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kd>let</span> <span class=nx>decryptedBuffer</span> <span class=o>=</span> <span class=nx>Buffer</span><span class=p>.</span><span class=nx>concat</span><span class=p>([</span><span class=nx>decipher</span><span class=p>.</span><span class=nx>update</span><span class=p>(</span><span class=nx>d</span><span class=p>),</span> <span class=nx>decipher</span><span class=p>.</span><span class=nx>final</span><span class=p>()]);</span>
+</span></span><span class=line><span class=cl>	<span class=kd>let</span> <span class=nx>decryptedText</span> <span class=o>=</span> <span class=nx>decryptedBuffer</span><span class=p>.</span><span class=nx>toString</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>decryptedText</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=c1>// you would use the function like this:
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>let</span> <span class=nx>decrypted</span> <span class=o>=</span> <span class=nx>decrypt</span><span class=p>(</span><span class=nx>x</span><span class=p>,</span><span class=nx>end</span><span class=p>,</span> <span class=nx>w</span><span class=p>,</span> <span class=nx>r</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=p>{</span> <span class=nx>decrypted</span><span class=p>};</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=speech-recognition>Speech Recognition</h3><p>我还是一个<code>ts</code>新手, 所以我在AI辅助工具的帮助下，写了下面的识别代码</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-typescript data-lang=typescript><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>decrypted</span><span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;./modelkey&#34;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=nx>path</span> <span class=kr>from</span> <span class=s2>&#34;path&#34;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>createSynthesizer</span><span class=p>,</span> <span class=nx>TranscriptionStatusCode</span><span class=p>,</span> <span class=nx>ITranscriptionCallback</span><span class=p>,</span> <span class=nx>createTranscriber</span>  <span class=p>}</span> <span class=kr>from</span> <span class=s2>&#34;@vscode/node-speech&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1>//uuid generate
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=p>{</span> <span class=nx>v4</span> <span class=kr>as</span> <span class=nx>uuidv4</span> <span class=p>}</span> <span class=kr>from</span> <span class=s1>&#39;uuid&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>modelName</span> <span class=o>=</span> <span class=s2>&#34;Microsoft Speech Recognizer zh-CN FP Model V3.1&#34;</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>modelPath</span> <span class=o>=</span>  <span class=nx>path</span><span class=p>.</span><span class=nx>join</span><span class=p>(</span><span class=nx>__dirname</span><span class=p>,</span> <span class=s2>&#34;assets&#34;</span><span class=p>,</span> <span class=s2>&#34;stt&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>modelKey</span> <span class=o>=</span> <span class=nx>decrypted</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=kd>function</span> <span class=nx>wrapperTranscriberCallback</span><span class=p>(</span><span class=nx>session_id</span>: <span class=kt>string</span><span class=p>,</span> <span class=nx>callback</span>: <span class=kt>ITranscriptionCallback</span><span class=p>)</span><span class=o>:</span> <span class=nx>ITranscriptionCallback</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=p>(</span><span class=nx>error</span><span class=p>,</span> <span class=nx>result</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=kd>let</span> <span class=nx>resData</span> <span class=o>=</span> <span class=nx>result</span><span class=p>.</span><span class=nx>data</span> <span class=o>?</span> <span class=nx>result</span><span class=p>.</span><span class=nx>data</span> <span class=o>:</span> <span class=s2>&#34;&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>		<span class=kr>const</span> <span class=nx>t</span> <span class=o>=</span> <span class=nx>session_id</span> <span class=o>?</span> <span class=nx>session_id</span> <span class=o>:</span> <span class=s2>&#34;&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nx>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nx>console</span><span class=p>.</span><span class=nx>error</span><span class=p>(</span><span class=sb>`[speech-</span><span class=si>${</span><span class=nx>t</span><span class=si>}</span><span class=sb>] error: </span><span class=si>${</span><span class=nx>error</span><span class=p>.</span><span class=nx>message</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=nx>callback</span><span class=p>(</span><span class=nx>error</span><span class=p>,</span> <span class=nx>result</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>switch</span><span class=p>(</span><span class=nx>result</span><span class=p>.</span><span class=nx>status</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=nx>TranscriptionStatusCode.STARTED</span>:
+</span></span><span class=line><span class=cl>        <span class=kt>console.log</span><span class=p>(</span><span class=sb>`[speech-</span><span class=si>${</span><span class=nx>t</span><span class=si>}</span><span class=sb>] started speech-to-text session</span><span class=si>${</span><span class=nx>resData</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=nx>TranscriptionStatusCode.RECOGNIZING</span>:
+</span></span><span class=line><span class=cl>        <span class=kt>console.debug</span><span class=p>(</span><span class=sb>`[speech-</span><span class=si>${</span><span class=nx>t</span><span class=si>}</span><span class=sb>] recognizing: </span><span class=si>${</span><span class=nx>resData</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=nx>TranscriptionStatusCode.RECOGNIZED</span>:
+</span></span><span class=line><span class=cl>        <span class=kt>console.log</span><span class=p>(</span><span class=sb>`[speech-</span><span class=si>${</span><span class=nx>t</span><span class=si>}</span><span class=sb>] : </span><span class=si>${</span><span class=nx>resData</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=nx>TranscriptionStatusCode.NOT_RECOGNIZED</span>:
+</span></span><span class=line><span class=cl>        <span class=kt>console.debug</span><span class=p>(</span><span class=sb>`[speech-</span><span class=si>${</span><span class=nx>t</span><span class=si>}</span><span class=sb>] not recognized</span><span class=si>${</span><span class=nx>resData</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=nx>TranscriptionStatusCode.INITIAL_SILENCE_TIMEOUT</span>:
+</span></span><span class=line><span class=cl>        <span class=kt>console.debug</span><span class=p>(</span><span class=sb>`[speech-</span><span class=si>${</span><span class=nx>t</span><span class=si>}</span><span class=sb>] initial silence timeout</span><span class=si>${</span><span class=nx>resData</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=nx>TranscriptionStatusCode.END_SILENCE_TIMEOUT</span>:
+</span></span><span class=line><span class=cl>        <span class=kt>console.debug</span><span class=p>(</span><span class=sb>`[speech-</span><span class=si>${</span><span class=nx>t</span><span class=si>}</span><span class=sb>] end silence timeout</span><span class=si>${</span><span class=nx>resData</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=nx>TranscriptionStatusCode.SPEECH_START_DETECTED</span>:
+</span></span><span class=line><span class=cl>        <span class=kt>console.debug</span><span class=p>(</span><span class=sb>`[speech-</span><span class=si>${</span><span class=nx>t</span><span class=si>}</span><span class=sb>] speech start detected</span><span class=si>${</span><span class=nx>resData</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=nx>TranscriptionStatusCode.SPEECH_END_DETECTED</span>:
+</span></span><span class=line><span class=cl>        <span class=kt>console.debug</span><span class=p>(</span><span class=sb>`[speech-</span><span class=si>${</span><span class=nx>t</span><span class=si>}</span><span class=sb>] speech end detected</span><span class=si>${</span><span class=nx>resData</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=nx>TranscriptionStatusCode.STOPPED</span>:
+</span></span><span class=line><span class=cl>        <span class=kt>console.debug</span><span class=p>(</span><span class=sb>`[speech-</span><span class=si>${</span><span class=nx>t</span><span class=si>}</span><span class=sb>] stopped speech-to-text session</span><span class=si>${</span><span class=nx>resData</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=nx>TranscriptionStatusCode.DISPOSED</span>:
+</span></span><span class=line><span class=cl>        <span class=kt>console.debug</span><span class=p>(</span><span class=sb>`[speech-</span><span class=si>${</span><span class=nx>t</span><span class=si>}</span><span class=sb>] disposed speech-to-text session</span><span class=si>${</span><span class=nx>resData</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=nx>TranscriptionStatusCode.ERROR</span>:
+</span></span><span class=line><span class=cl>				<span class=kt>console.error</span><span class=p>(</span><span class=sb>`[speech-</span><span class=si>${</span><span class=nx>t</span><span class=si>}</span><span class=sb>] error: </span><span class=si>${</span><span class=nx>resData</span><span class=si>}</span><span class=sb>`</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>				<span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>default</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>      <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;Unknown transcription status:&#39;</span><span class=p>,</span> <span class=nx>result</span><span class=p>.</span><span class=nx>status</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl> <span class=nx>use</span> <span class=nx>settimeout</span> <span class=nx>to</span> <span class=nx>simulate</span> <span class=nx>every</span> <span class=mi>10</span> <span class=nx>seconds</span> <span class=nx>to</span> <span class=nx>start</span> <span class=nx>a</span> <span class=k>new</span> <span class=nx>session</span>
+</span></span><span class=line><span class=cl> <span class=nx>setTimeout</span><span class=p>(()</span> <span class=o>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl> 		<span class=kr>const</span> <span class=nx>t</span> <span class=o>=</span> <span class=nx>uuidv4</span><span class=p>();</span>
+</span></span><span class=line><span class=cl> <span class=kr>const</span> <span class=nx>wrappedCallback</span> <span class=o>=</span> <span class=nx>wrapperTranscriberCallback</span><span class=p>(</span><span class=nx>t</span><span class=p>,</span> <span class=p>(</span><span class=nx>err</span><span class=p>,</span> <span class=nx>res</span><span class=p>)</span> <span class=o>=&gt;</span> <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=nx>err</span><span class=p>,</span> <span class=nx>res</span><span class=p>));</span>
+</span></span><span class=line><span class=cl> <span class=kd>let</span> <span class=nx>transcriber</span> <span class=o>=</span> <span class=nx>createTranscriber</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>   <span class=p>{</span> <span class=nx>modelName</span><span class=p>,</span> <span class=nx>modelPath</span><span class=p>,</span> <span class=nx>modelKey</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>   <span class=nx>wrappedCallback</span>
+</span></span><span class=line><span class=cl> <span class=p>);</span>
+</span></span><span class=line><span class=cl> 	<span class=nx>transcriber</span><span class=p>.</span><span class=nx>start</span><span class=p>();</span>
+</span></span><span class=line><span class=cl> <span class=p>},</span> <span class=mi>300</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=config>Config</h3><p>你需要将动态链接库放到对应的包目录下本地才会运行
+<img src=/assets/lib.png alt></p><p>当然你也可以根据这个库的环境来自己编译打包,参考这个<a href=https://github.com/microsoft/node-speech/blob/main/binding.gyp>gyp文件</a></p><h3 id=usage>Usage</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>bun run index.ts
+</span></span></code></pre></td></tr></table></div></div><p><img src=/assets/show.png alt></p><h2 id=summary>Summary</h2><p>这次玩了一下vscode的语音识别插件, 通过逆向工程还原了一下它的代码,但其实它的<a href=https://openvoice-tech.net/index.php/Real-time-factor><code>RTF</code></a>还是很好的,
+缺点就是语音识别效果感觉不好, 没有达摩院的<a href=https://github.com/alibaba-damo-academy/FunASR>FunASR</a>模型效果好,也主要是我测试的是中文
+达摩院的缺陷就是安装依赖很大至少3G,微软的这个很轻量,140M左右.
+我看官方的SDK里面有提到<code>TTS</code>,未来也有可能有本地嵌入式的<code>TTS</code>模型,这个也是一个很好的方向
+不过这个STT暂时之支持C++/C#/Java的SDK,它是用<a href=https://github.com/microsoft/onnxruntime>onnxruntime</a>来进行推理的</p><h2 id=extra>Extra</h2><p>我们来看这个中文的语音模型里面有个很有意思的东西</p><p><img src=/assets/profanity.png alt></p><p>其实这个就是它的过滤词词表,但是我不知道如何解密它
+还有一个很有意思的东西,有个<code>keyword/heycode.table</code>文件, 这个是服务于嵌入式语音识别的keyword recognition</p><h2 id=reference>Reference</h2><ul><li><a href=https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-to-text>speech-to-text</a></li><li><a href=https://github.com/microsoft/node-speech>node-speech</a></li><li><a href=https://learn.microsoft.com/en-us/azure/ai-services/speech-service/embedded-speech>embedded-speech-recognition</a></li><li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-speech">vscode-speech</a></li></ul></div><footer class=post-footer><nav class=post-nav><a class=next href=/post/multiprocess_and_multithread/><span class="next-text nav-default">Multi-threading and Multi-process</span>
+<span class="next-text nav-mobile">Next</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><script src=https://utteranc.es/client.js repo=noahlias/noahlias.github.io issue-term=pathname theme=github-light crossorigin=anonymous async></script><noscript>Please enable JavaScript to view the <a href=https://github.com/utterance>comments powered by utterances.</a></noscript></div></main><footer id=footer class=footer><div class=social-links><a href=https://www.github.com/noahlias class="iconfont icon-github" title=github></a>
+<a href=https://weibo.com/Alias21 class="iconfont icon-weibo" title=weibo></a>
+<a href=https://space.bilibili.com/1741799 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://noahlias.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>Powered by <a class=hexo-link href=https://gohugo.io>Hugo</a></span>
+<span class=division>|</span>
+<span class=theme-info>Theme -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span>
+<span class=copyright-year>&copy;
+2022 -
+2024<span class=heart><i class="iconfont icon-heart"></i></span><span>Noahlias</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script>
+<script type=text/javascript>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script><script async src=https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin=anonymous></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-85629761-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>
