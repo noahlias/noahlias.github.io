@@ -8,13 +8,14 @@
 直接找到这个接口复制这个token就可以了,
 其次还需要找到这个appkey
 你可以在对应的websocket请求里面找到这个值
-<img src=tts_ws.jpg alt></p><h2 id=poc>POC</h2><p>我在GITHUB找到了类似的的项目
+<img src=/assets/tts_ws.jpg alt></p><h2 id=poc>POC</h2><p>我在GITHUB找到了类似的的项目
 <a href=https://github.com/kuwacom/CapCut-TTS/>CapCut-TTS</a></p><p>OK, 我们就从这个项目开始实践
 下载安装依赖修改部分设置和环境变量</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>npm run <span class=nb>test</span>
 </span></span></code></pre></td></tr></table></div></div><p>之后开始测试,用curl对本地的express服务发起请求
 <img src=/assets/curl_local_tts.jpg alt>
-可以看到本地tts已经接受到对应的请求并返回了相应的数据</p><p><img src=/assets/tts_local.jpg alt></p><h2 id=output>Output</h2><p><img src=/assets/local_tts.mp3 alt></p><h2 id=todo>TODO</h2><ul><li><input disabled type=checkbox> docker部署</li><li><input disabled type=checkbox> 添加更多的speaker</li><li><input disabled type=checkbox> 改成终端命令行形式</li><li><input disabled type=checkbox> 支持多种语音格式</li></ul></div><footer class=post-footer><div class=post-tags><a href=/tags/tts/>TTS</a>
+可以看到本地tts已经接受到对应的请求并返回了相应的数据</p><p><img src=/assets/tts_local.jpg alt></p><h2 id=output>Output</h2><div style=display:flex;align-items:center;gap:20px><button id=togglePlayPause style=float:left;width:50px;height:50px;font-size:24px;color:#333;background-color:#ececf1;border:none;cursor:pointer;border-radius:5px;display:flex;align-items:center;justify-content:center><svg xmlns="http://www.w3.org/2000/svg" fill="currentcolor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 4a8 8 0 100 16 8 8 0 000-16zM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12z" clip-rule="evenodd"/><path d="M9.5 14.668V9.332a1 1 0 011.54-.842l4.152 2.669a1 1 0 010 1.682L11.04 15.51a1 1 0 01-1.541-.84z"/></svg></button><div style=flex:1><waveform id=waveform url=/assets/local_tts.wav style="clear: both;"></waveform></div></div><script src=https://unpkg.com/wavesurfer.js@7></script>
+<script>document.addEventListener("DOMContentLoaded",function(){var t,n=window.WaveSurfer;const e=n.create({container:document.body.querySelector("#waveform"),waveColor:"rgb(194, 194, 194)",progressColor:"rgb(173, 173, 173)",url:document.body.querySelector("#waveform").getAttribute("url"),barWidth:1,barGap:.5,barRadius:.5});t=document.getElementById("togglePlayPause"),t.addEventListener("click",function(){e.playPause()}),e.once("interaction",function(){e.play()})})</script><h2 id=todo>TODO</h2><ul><li><input disabled type=checkbox> docker部署</li><li><input disabled type=checkbox> 添加更多的speaker</li><li><input disabled type=checkbox> 改成终端命令行形式</li><li><input disabled type=checkbox> 支持多种语音格式</li></ul></div><footer class=post-footer><div class=post-tags><a href=/tags/tts/>TTS</a>
 <a href=/tags/reverse-engineer/>Reverse Engineer</a>
 <a href=/tags/fun/>Fun</a></div><nav class=post-nav><a class=next href=/post/vscode_speech_reverse_engineer/><span class="next-text nav-default">Vscode_speech_reverse_engineering</span>
 <span class="next-text nav-mobile">Next</span>
