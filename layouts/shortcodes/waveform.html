@@ -1,0 +1,32 @@
+
+<div style="display: flex; align-items: center; gap: 20px;">
+<button id="togglePlayPause" style="float: left; width: 50px; height: 50px; font-size: 24px; color: #333; background-color: rgb(236,236,241); border: none; cursor: pointer;border-radius:5px; display: flex; align-items: center; justify-content: center;">
+<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Z" clip-rule="evenodd"></path><path d="M9.5 14.668V9.332a1 1 0 0 1 1.54-.842l4.152 2.669a1 1 0 0 1 0 1.682L11.04 15.51a1 1 0 0 1-1.541-.84Z"></path></svg>
+</button>
+
+<div style="flex: 1;">
+<waveform id="waveform" url="{{ .Get "src" }}" style="clear: both;"></waveform>
+</div>
+</div>
+<script src="https://unpkg.com/wavesurfer.js@7"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var WaveSurfer = window.WaveSurfer;
+  const wavesurfer = WaveSurfer.create({
+    container: document.body.querySelector('#waveform'),
+    waveColor: 'rgb(194, 194, 194)',
+    progressColor: 'rgb(173, 173, 173)',
+    url: document.body.querySelector('#waveform').getAttribute('url'),
+    barWidth: 1,
+    barGap: 0.5,
+    barRadius: 0.5,
+  });
+  var button = document.getElementById('togglePlayPause');
+  button.addEventListener('click', function() {
+    wavesurfer.playPause();
+  });
+  wavesurfer.once('interaction', function() {
+    wavesurfer.play();
+  });
+});
+</script>

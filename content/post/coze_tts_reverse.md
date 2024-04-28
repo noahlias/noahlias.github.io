@@ -17,7 +17,7 @@ categories: ["Fun"]
 直接找到这个接口复制这个token就可以了,
 其次还需要找到这个appkey
 你可以在对应的websocket请求里面找到这个值
-![](tts_ws.jpg)
+![](/assets/tts_ws.jpg)
 
 ## POC
 
@@ -39,7 +39,7 @@ npm run test
 
 ## Output
 
-![](/assets/local_tts.mp3)
+{{< waveform src="/assets/local_tts.wav" >}}
 
 ## TODO
 
